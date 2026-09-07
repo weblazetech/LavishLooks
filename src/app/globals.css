@@ -1,0 +1,319 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Karthikeya Lavish Looks - Peacock Atelier Design System
+   Light theme LOCKED site-wide. No dark mode.
+   ============================================================ */
+
+@theme {
+  /* Colors - Peacock Atelier */
+  --color-ivory: #faf6f0;
+  --color-sand: #f3ece2;
+  --color-porcelain: #fffdf9;
+  --color-ink: #22302d;
+  --color-muted: #5a655f;
+  --color-teal: #0f6b62;
+  --color-teal-deep: #0b5148;
+  --color-gold: #a16207;
+  --color-hairline: #e3d9cb;
+
+  /* Map to Tailwind primitives so shadcn components inherit the palette */
+  --color-background: #faf6f0;
+  --color-foreground: #22302d;
+  --color-card: #fffdf9;
+  --color-card-foreground: #22302d;
+  --color-popover: #fffdf9;
+  --color-popover-foreground: #22302d;
+  --color-primary: #0f6b62;
+  --color-primary-foreground: #faf6f0;
+  --color-secondary: #f3ece2;
+  --color-secondary-foreground: #22302d;
+  --color-accent: #f3ece2;
+  --color-accent-foreground: #0f6b62;
+  --color-destructive: #b91c1c;
+  --color-destructive-foreground: #faf6f0;
+  --color-border: #e3d9cb;
+  --color-input: #e3d9cb;
+  --color-ring: #0f6b62;
+
+  /* Fonts */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-mono: ui-monospace, monospace;
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-card: 20px;
+  --radius-img: 16px;
+  --radius-input: 12px;
+
+  /* Shadows - tinted to ink, never pure black */
+  --shadow-card: 0 8px 24px rgba(34, 48, 45, 0.08);
+  --shadow-lift: 0 14px 30px rgba(34, 48, 45, 0.12);
+
+  /* Easing */
+  --ease-atelier: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Override shadcn radius scale to match Peacock Atelier */
+:root {
+  --radius: 12px;
+  --background: #faf6f0;
+  --foreground: #22302d;
+  --card: #fffdf9;
+  --card-foreground: #22302d;
+  --popover: #fffdf9;
+  --popover-foreground: #22302d;
+  --primary: #0f6b62;
+  --primary-foreground: #faf6f0;
+  --secondary: #f3ece2;
+  --secondary-foreground: #22302d;
+  --muted: #f3ece2;
+  --muted-foreground: #5a655f;
+  --accent: #f3ece2;
+  --accent-foreground: #0f6b62;
+  --destructive: #b91c1c;
+  --destructive-foreground: #faf6f0;
+  --border: #e3d9cb;
+  --input: #e3d9cb;
+  --ring: #0f6b62;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-hairline);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.08;
+  }
+  h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+  /* Focus ring - 2px teal, visible on every interactive element */
+  *:focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* Selection color */
+  ::selection {
+    background-color: rgba(15, 107, 98, 0.18);
+    color: var(--color-ink);
+  }
+  /* Custom scrollbar - warm and subtle */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ivory);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-hairline);
+    border-radius: 999px;
+    border: 2px solid var(--color-ivory);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold);
+  }
+}
+
+@layer utilities {
+  /* Container */
+  .container-atelier {
+    max-width: 1160px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  /* Display H1 - clamp for responsive hero */
+  .text-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+
+  /* H2 */
+  .text-h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.15;
+  }
+
+  /* H3 - card titles */
+  .text-h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.375rem;
+    line-height: 1.3;
+  }
+
+  /* Kicker - tracked teal caps */
+  .text-kicker {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+  }
+
+  /* Pull - Cormorant italic, max one per section */
+  .text-pull {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+
+  /* Price - Montserrat 700 in gold */
+  .text-price {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    color: var(--color-gold);
+  }
+
+  /* Caption - Montserrat 500 */
+  .text-caption {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  /* Body max-width */
+  .prose-atelier {
+    max-width: 65ch;
+  }
+
+  /* Sand gradient fallback for the hero panel when WebGL unavailable */
+  .bg-sand-gradient {
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(161, 98, 7, 0.10), transparent 55%),
+      radial-gradient(ellipse at 70% 80%, rgba(15, 107, 98, 0.08), transparent 60%),
+      linear-gradient(135deg, #f3ece2 0%, #faf6f0 50%, #f3ece2 100%);
+  }
+
+  /* Gold glow (only at hero photo edge + bridal band headline) */
+  .gold-glow-edge {
+    box-shadow:
+      0 0 0 1px rgba(161, 98, 7, 0.18),
+      0 18px 50px -12px rgba(161, 98, 7, 0.30),
+      0 8px 24px rgba(34, 48, 45, 0.10);
+  }
+
+  /* Hairline border at 60% opacity */
+  .border-hairline-soft {
+    border-color: rgba(227, 217, 203, 0.6);
+  }
+
+  /* Dotted gold leader - flex grow with dotted bottom border */
+  .dotted-leader {
+    flex: 1 1 auto;
+    margin-inline: 12px;
+    border-bottom: 1px dotted rgba(161, 98, 7, 0.55);
+    transform: translateY(-4px);
+  }
+
+  /* Peacock feather motif - subtle gold line, used as ornament */
+  .feather-motif {
+    color: var(--color-gold);
+    opacity: 0.7;
+  }
+
+  /* Bridal band sheen drift animation - the ONE allowed ambient motion */
+  @keyframes sheen-drift {
+    0% { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
+    20% { opacity: 0.55; }
+    80% { opacity: 0.55; }
+    100% { transform: translateX(120%) skewX(-12deg); opacity: 0; }
+  }
+  .sheen-drift {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .sheen-drift::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 250, 230, 0.65) 50%,
+      transparent 100%
+    );
+    animation: sheen-drift 8s var(--ease-atelier) infinite;
+  }
+
+  /* Reveal - fade-up 20px. Hidden state is the initial inline style,
+     JS (motion) lifts to visible. Content is visible without JS because
+     we set opacity:1 + translateY(0) as the default and only animate
+     when motion-react mounts. */
+  .reveal-init {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Skeleton shimmer for loading states */
+  @keyframes shimmer {
+    0% { background-position: -800px 0; }
+    100% { background-position: 800px 0; }
+  }
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-sand) 0%,
+      var(--color-porcelain) 50%,
+      var(--color-sand) 100%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.6s infinite linear;
+  }
+}
+
+/* Reduced motion - non-negotiable. Disables reveals, sheen drift,
+   smooth scroll AND the WebGL layer (handled in JS). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .sheen-drift::before {
+    display: none;
+  }
+}
