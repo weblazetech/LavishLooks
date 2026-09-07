@@ -1,0 +1,119 @@
+{
+  "theme": {
+    "extend": {
+      "colors": {
+        "ivory": "#faf6f0",
+        "sand": "#f3ece2",
+        "porcelain": "#fffdf9",
+        "ink": "#22302d",
+        "muted": "#5a655f",
+        "teal": "#0f6b62",
+        "teal-deep": "#0b5148",
+        "gold": "#a16207",
+        "hairline": "#e3d9cb",
+        "primary": "#0f6b62"
+      },
+      "fontFamily": {
+        "display": [
+          "Cormorant Garamond"
+        ],
+        "h2": [
+          "Cormorant Garamond"
+        ],
+        "h3": [
+          "Montserrat"
+        ],
+        "body": [
+          "Montserrat"
+        ],
+        "button": [
+          "Montserrat"
+        ],
+        "price": [
+          "Montserrat"
+        ],
+        "kicker": [
+          "Montserrat"
+        ],
+        "pull": [
+          "Cormorant Garamond"
+        ],
+        "caption": [
+          "Montserrat"
+        ]
+      },
+      "fontSize": {
+        "display": [
+          "4.5rem",
+          {
+            "fontWeight": "600"
+          }
+        ],
+        "h2": [
+          "3rem",
+          {
+            "fontWeight": "600"
+          }
+        ],
+        "h3": [
+          "1.375rem",
+          {
+            "fontWeight": "600"
+          }
+        ],
+        "body": [
+          "1rem",
+          {
+            "fontWeight": "400"
+          }
+        ],
+        "button": [
+          "1rem",
+          {
+            "letterSpacing": "0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "price": [
+          "1.25rem",
+          {
+            "fontWeight": "700"
+          }
+        ],
+        "kicker": [
+          "0.8125rem",
+          {
+            "letterSpacing": "0.18em",
+            "fontWeight": "600"
+          }
+        ],
+        "pull": [
+          "1.5rem",
+          {
+            "fontWeight": "500"
+          }
+        ],
+        "caption": [
+          "0.875rem",
+          {
+            "fontWeight": "500"
+          }
+        ]
+      },
+      "borderRadius": {
+        "pill": "999px",
+        "card": "20px",
+        "img": "16px",
+        "input": "12px"
+      },
+      "spacing": {
+        "xs": "6px",
+        "sm": "12px",
+        "md": "20px",
+        "lg": "32px",
+        "xl": "48px",
+        "section": "88px"
+      }
+    }
+  }
+}
