@@ -7,130 +7,261 @@ import {
   Hand,
   Flower2,
   User,
-  ShieldCheck,
-  Receipt,
   Star,
   ArrowRight,
-  MapPin,
-  Clock,
+  CalendarCheck,
   Users,
+  CheckCircle2,
+  HeartHandshake,
+  Layers,
+  Crown,
 } from "lucide-react";
 import { Kicker } from "@/components/site/kicker";
 import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/site/button";
-import { HeroCanvas } from "@/components/threejs/hero-canvas";
 import { FeatherMotif } from "@/components/site/feather-motif";
-import {
-  salon,
-  serviceCategories,
-  homeGalleryTiles,
-  promises,
-  reviews,
-} from "@/data/salon";
+import { HeroCanvas } from "@/components/threejs/hero-canvas";
+import { salon } from "@/data/salon";
 
-// Icon map - Lucide thin-line only
-const iconMap = {
-  scissors: Scissors,
-  sparkles: Sparkles,
-  brush: Brush,
-  hand: Hand,
-  flower2: Flower2,
-  user: User,
-  "shield-check": ShieldCheck,
-  receipt: Receipt,
-} as const;
+// Six category items with luxury salon photography
+const homeServiceCards = [
+  {
+    title: "Hair",
+    slug: "hair",
+    description: "Professional cuts, styling and hair transformations.",
+    icon: Scissors,
+    image: "/salon/gallery-hair-1.png",
+    alt: "Professional cuts, styling and hair transformations at Karthikeya Lavish Looks",
+  },
+  {
+    title: "Skin & Facials",
+    slug: "skin-facials",
+    description: "Beauty and skincare treatments tailored to your needs.",
+    icon: Sparkles,
+    image: "/salon/service-skin-facials.jpg",
+    alt: "Beauty and skincare treatments tailored to your needs at Karthikeya Lavish Looks",
+  },
+  {
+    title: "Makeup",
+    slug: "makeup",
+    description: "Makeup looks for occasions, celebrations and special moments.",
+    icon: Brush,
+    image: "/salon/gallery-makeup-1.png",
+    alt: "Makeup looks for occasions, celebrations and special moments at Karthikeya Lavish Looks",
+  },
+  {
+    title: "Nails",
+    slug: "nails",
+    description: "Clean, polished and occasion-ready nail services.",
+    icon: Hand,
+    image: "/salon/service-nails.jpg",
+    alt: "Clean, polished and occasion-ready nail services at Karthikeya Lavish Looks",
+  },
+  {
+    title: "Mehndi & Bridal",
+    slug: "mehndi-bridal",
+    description: "Mehndi, bridal makeup and occasion-ready beauty services.",
+    icon: Flower2,
+    image: "/salon/gallery-mehndi-1.png",
+    alt: "Mehndi, bridal makeup and occasion-ready beauty services at Karthikeya Lavish Looks",
+  },
+  {
+    title: "Men's Grooming",
+    slug: "mens-grooming",
+    description: "Professional hair, beard and grooming services for men.",
+    icon: User,
+    image: "/salon/gallery-grooming-1.png",
+    alt: "Professional hair, beard and grooming services for men at Karthikeya Lavish Looks",
+  },
+];
+
+// Transformation gallery items (6 real salon looks)
+const transformationGallery = [
+  {
+    src: "/salon/gallery-hair-1.png",
+    category: "Hair",
+    alt: "Professional hair transformation and styling at Karthikeya Lavish Looks",
+    caption: "Lustrous layered haircut and styling",
+  },
+  {
+    src: "/salon/gallery-mehndi-1.png",
+    category: "Mehndi",
+    alt: "Intricate bridal henna design hand-applied at Karthikeya Lavish Looks",
+    caption: "Intricate bridal and occasion mehndi",
+  },
+  {
+    src: "/salon/gallery-hair-2.png",
+    category: "Men's Grooming",
+    alt: "Precision men's fade cut and beard trim",
+    caption: "Precision fade and beard line-up",
+  },
+  {
+    src: "/salon/gallery-makeup-1.png",
+    category: "Makeup",
+    alt: "Soft evening makeup with luminous glow",
+    caption: "Warm evening occasion makeup",
+  },
+  {
+    src: "/salon/gallery-grooming-1.png",
+    category: "Men's Grooming",
+    alt: "Traditional hot towel clean shave and beard shaping",
+    caption: "Hot-towel shave and grooming",
+  },
+  {
+    src: "/salon/gallery-styling-1.png",
+    category: "Hair",
+    alt: "Professional blow-dry and hair transformation finish",
+    caption: "Smooth salon blowout and finish",
+  },
+];
+
+// Why Karthikeya Lavish Looks (4 feature items)
+const whyFeatures = [
+  {
+    title: "Personalized Service",
+    description: "Every appointment is tailored to the look and finish you want.",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Complete Beauty Experience",
+    description: "Hair, skin, makeup, nails, bridal, mehndi and grooming under one roof.",
+    icon: Layers,
+  },
+  {
+    title: "Unisex Expertise",
+    description: "Professional beauty and grooming services for women and men.",
+    icon: Users,
+  },
+  {
+    title: "Bridal Attention",
+    description: "Dedicated bridal and occasion services planned around your special day.",
+    icon: Crown,
+  },
+];
 
 export default function HomePage() {
   return (
     <>
-      {/* ===================== HERO ===================== */}
-      <Hero />
+      {/* 1. HERO */}
+      <HeroSection />
 
-      {/* ===================== TRUST STRIP ===================== */}
-      <TrustStrip />
+      {/* 2. TRUST STRIP */}
+      <TrustStripSection />
 
-      {/* ===================== SERVICE CATEGORIES ===================== */}
-      <ServiceCategories />
+      {/* 3. SERVICES PREVIEW */}
+      <ServicesPreviewSection />
 
-      {/* ===================== BRIDAL BAND ===================== */}
-      <BridalBand />
+      {/* 4. BRIDAL & OCCASION BANNER */}
+      <BridalBannerSection />
 
-      {/* ===================== GALLERY STRIP ===================== */}
-      <GalleryStrip />
+      {/* 5. TRANSFORMATION GALLERY PREVIEW */}
+      <GalleryPreviewSection />
 
-      {/* ===================== WHY ROW ===================== */}
-      <WhyRow />
+      {/* 6. WHY KARTHIKEYA LAVISH LOOKS */}
+      <WhySection />
 
-      {/* ===================== REVIEWS ===================== */}
-      <Reviews />
+      {/* 7. SOCIAL PROOF */}
+      <SocialProofSection />
 
-      {/* ===================== BOOKING CTA BAND ===================== */}
-      <BookingCTA />
+      {/* 8. FINAL BOOKING CTA */}
+      <FinalBookingCTASection />
     </>
   );
 }
 
-/* ----------------------------------------------------------------
-   HERO - split: left text + CTAs, right WebGL panel + salon photo
-   ---------------------------------------------------------------- */
-function Hero() {
+/* =================================================================
+   1. HERO SECTION - Split-screen with floating card
+   ================================================================= */
+function HeroSection() {
   return (
     <section
-      aria-label="Welcome"
-      className="relative min-h-[calc(100dvh-88px)] flex items-center"
+      id="hero-section"
+      aria-label="Welcome to Karthikeya Lavish Looks"
+      className="relative min-h-[calc(100dvh-88px)] flex items-center pt-24 pb-14 sm:py-20 overflow-hidden"
     >
       <div className="container-atelier w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-12 items-center">
-          {/* LEFT - text */}
-          <div className="order-2 lg:order-1 max-w-[560px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left Column: Eyebrow, Main Headline, Subtext, Buttons */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
             <Reveal>
-              <Kicker>Warangal&apos;s Unisex Beauty Studio</Kicker>
+              <Kicker className="tracking-[0.22em] text-teal uppercase font-semibold text-[0.8125rem]">
+                KARTHIKEYA LAVISH LOOKS
+              </Kicker>
             </Reveal>
+
             <Reveal delay={80}>
-              <h1 className="text-display text-ink mt-4">
-                Look Lavish.
+              <h1 className="text-display text-ink mt-4 text-[clamp(2.5rem,5.2vw,4.25rem)] leading-[1.08] font-serif font-semibold">
+                Where Every Look
                 <br />
-                Every Single Day.
+                Becomes Your Signature.
               </h1>
             </Reveal>
+
             <Reveal delay={160}>
-              <p className="mt-5 text-[1.0625rem] leading-[1.65] text-muted prose-atelier">
-                Hair, skin, makeup, mehndi and men&apos;s grooming in Kashibugga - Warangal&apos;s 5.0-rated unisex salon.
+              <p className="mt-5 text-[1.0625rem] leading-[1.7] text-muted prose-atelier max-w-[540px]">
+                Professional hair, beauty, bridal, mehndi and grooming services designed to help you look and feel your best.
               </p>
             </Reveal>
+
             <Reveal delay={240}>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <Button as="link" href="/contact" size="lg">
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Button
+                  as="link"
+                  href="/contact"
+                  size="lg"
+                  className="shadow-sm hover:shadow-md transition-shadow"
+                >
                   Book an Appointment
                 </Button>
-                <Button as="link" href="/services" variant="ghost" size="lg">
-                  View Services
+                <Button
+                  as="link"
+                  href="/services"
+                  variant="ghost"
+                  size="lg"
+                  className="border border-hairline/80 hover:border-teal/50"
+                >
+                  Explore Services
                 </Button>
               </div>
             </Reveal>
           </div>
 
-          {/* RIGHT - WebGL panel behind salon photo */}
-          <div className="order-1 lg:order-2 relative">
+          {/* Right Column: Editorial Image with Floating Card */}
+          <div className="lg:col-span-5 relative">
             <Reveal delay={120}>
-              <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[5/6] w-full rounded-img overflow-hidden">
-                {/* Sand-gradient base + WebGL canvas (Lustrous Strands) */}
-                <HeroCanvas className="absolute inset-0" />
-                {/* Salon photo, composited over the canvas */}
-                <div className="absolute inset-0 flex items-end justify-center">
-                  <div className="relative w-[78%] h-[88%] mb-3">
+              <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] w-full rounded-img overflow-hidden bg-sand shadow-[0_12px_36px_rgba(34,48,45,0.09)]">
+                {/* Ambient 3D canvas layer behind salon image */}
+                <HeroCanvas className="absolute inset-0 opacity-60" />
+
+                {/* Main Salon Photo */}
+                <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-4">
+                  <div className="relative w-full h-full rounded-img overflow-hidden gold-glow-edge">
                     <Image
                       src="/salon/hero-styling-chair.png"
-                      alt="Karthikeya Lavish Looks salon interior in warm daylight - empty styling chair before a brass-framed mirror"
+                      alt="Karthikeya Lavish Looks luxurious styling studio in Kashibugga, Warangal"
                       fill
                       priority
-                      sizes="(max-width: 1024px) 90vw, 45vw"
-                      className="object-cover rounded-img gold-glow-edge"
+                      sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 500px"
+                      className="object-cover transition-transform duration-700 hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent pointer-events-none" />
                   </div>
                 </div>
-                {/* Subtle inner top fade so the canvas reads above the photo edge */}
-                <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-sand/60 to-transparent pointer-events-none" />
+
+                {/* Floating Card */}
+                <div className="absolute bottom-5 left-5 right-5 sm:left-6 sm:right-auto z-10">
+                  <div className="backdrop-blur-md bg-porcelain/95 border border-hairline/90 rounded-card p-4 shadow-[0_10px_25px_rgba(34,48,45,0.12)]">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-pill bg-teal animate-pulse" />
+                      <span className="text-[0.75rem] font-bold tracking-[0.18em] uppercase text-teal">
+                        UNISEX SALON
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[0.875rem] font-medium text-ink">
+                      Hair • Beauty • Bridal • Grooming
+                    </p>
+                  </div>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -140,77 +271,141 @@ function Hero() {
   );
 }
 
-/* ----------------------------------------------------------------
-   TRUST STRIP - sand band, 4 block facts
-   ---------------------------------------------------------------- */
-function TrustStrip() {
-  const facts = [
-    { stat: "5.0★", label: `${reviews.count} ${reviews.platform} reviews`, icon: Star },
-    { stat: "Unisex", label: "Studio for women & men", icon: Users },
-    { stat: "Kashibugga", label: "Warangal, Telangana", icon: MapPin },
-    { stat: "8 AM - 9 PM", label: "Monday verified", icon: Clock },
+/* =================================================================
+   2. TRUST STRIP SECTION - Clean verified metrics
+   ================================================================= */
+function TrustStripSection() {
+  const trustMetrics = [
+    {
+      stat: "5.0★",
+      label: "Rated on JustDial",
+      icon: Star,
+    },
+    {
+      stat: "11 Reviews",
+      label: "JustDial reviews",
+      icon: CheckCircle2,
+    },
+    {
+      stat: "Unisex Salon",
+      label: "Beauty & grooming",
+      icon: Users,
+    },
+    {
+      stat: "Appointment Based",
+      label: "Bridal services",
+      icon: CalendarCheck,
+    },
   ];
+
   return (
-    <section aria-label="Salon facts" className="bg-sand py-10 sm:py-12">
+    <section
+      id="trust-strip"
+      aria-label="Verified Salon Highlights"
+      className="bg-sand border-y border-hairline/70 py-9 sm:py-11"
+    >
       <div className="container-atelier">
-        <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          {facts.map((f, i) => (
-            <Reveal as="li" key={f.stat} delay={i * 80} className="flex items-center gap-3">
-              <f.icon size={20} className="text-gold shrink-0" strokeWidth={1.5} />
-              <div className="min-w-0">
-                <div className="font-sans font-bold text-[1.5rem] leading-tight text-ink">
-                  {f.stat}
+        <ul className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+          {trustMetrics.map((metric, index) => {
+            const Icon = metric.icon;
+            return (
+              <Reveal
+                as="li"
+                key={metric.stat}
+                delay={index * 70}
+                className="flex items-center gap-3.5"
+              >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill bg-porcelain text-gold shadow-sm border border-hairline/40">
+                  <Icon size={20} strokeWidth={1.75} className="text-gold" />
                 </div>
-                <div className="text-caption text-muted">{f.label}</div>
-              </div>
-            </Reveal>
-          ))}
+                <div className="min-w-0">
+                  <div className="font-sans font-bold text-[1.25rem] sm:text-[1.375rem] leading-tight text-ink">
+                    {metric.stat}
+                  </div>
+                  <div className="text-[0.8125rem] text-muted font-medium mt-0.5">
+                    {metric.label}
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
         </ul>
       </div>
     </section>
   );
 }
 
-/* ----------------------------------------------------------------
-   SERVICE CATEGORIES - 6 porcelain cards
-   ---------------------------------------------------------------- */
-function ServiceCategories() {
+/* =================================================================
+   3. SERVICES PREVIEW SECTION - Six elegant cards (3 cols / 2 cols / 1 col)
+   ================================================================= */
+function ServicesPreviewSection() {
   return (
-    <section aria-labelledby="categories-h" className="py-[clamp(3.5rem,9vw,5.5rem)] sm:py-[88px]">
+    <section
+      id="services-preview"
+      aria-labelledby="services-heading"
+      className="py-16 sm:py-24 bg-ivory"
+    >
       <div className="container-atelier">
-        <Reveal className="max-w-[640px]">
-          <Kicker>What we do</Kicker>
-          <h2 id="categories-h" className="text-h2 text-ink mt-3">
-            Six categories, one chair.
-          </h2>
-          <p className="mt-3 text-muted leading-relaxed">
-            From a quick beard line-up to full bridal mehndi - every service is held by a trained stylist, never a trainee.
-          </p>
-        </Reveal>
+        <div className="text-center max-w-[680px] mx-auto">
+          <Reveal>
+            <Kicker>WHAT WE DO</Kicker>
+            <h2 id="services-heading" className="text-h2 text-ink mt-3">
+              Everything You Need, Under One Roof
+            </h2>
+            <p className="mt-3.5 text-muted text-[1.0625rem] leading-relaxed">
+              From everyday grooming to bridal glamour, explore our range of professional beauty and grooming services.
+            </p>
+          </Reveal>
+        </div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {serviceCategories.map((cat, i) => {
-            const Icon = iconMap[cat.icon as keyof typeof iconMap] ?? Scissors;
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          {homeServiceCards.map((service, index) => {
+            const Icon = service.icon;
             return (
-              <Reveal key={cat.slug} delay={i * 80}>
-                <article className="group h-full rounded-card bg-porcelain border border-hairline/60 p-6 shadow-[0_8px_24px_rgba(34,48,45,0.08)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(34,48,45,0.12)] hover:border-teal/30">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-pill bg-sand text-teal">
-                      <Icon size={20} strokeWidth={1.5} />
+              <Reveal key={service.slug} delay={index * 60}>
+                <article className="group h-full flex flex-col justify-between rounded-card bg-porcelain border border-hairline/80 overflow-hidden shadow-[0_8px_24px_rgba(34,48,45,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(34,48,45,0.12)] hover:border-teal/40">
+                  {/* Category Image Header */}
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-sand">
+                    <Image
+                      src={service.image}
+                      alt={service.alt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute top-3.5 left-3.5">
+                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-pill bg-porcelain/95 backdrop-blur-sm text-teal shadow-sm border border-hairline/50 transition-colors group-hover:bg-teal group-hover:text-ivory">
+                        <Icon size={19} strokeWidth={1.75} />
+                      </div>
                     </div>
-                    <FeatherMotif size={16} className="opacity-30 group-hover:opacity-70 transition-opacity" />
                   </div>
-                  <h3 className="text-h3 text-ink">{cat.name}</h3>
-                  <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted">
-                    {cat.description}
-                  </p>
-                  <Link
-                    href="/services"
-                    className="mt-5 inline-flex items-center gap-1.5 text-[0.875rem] font-semibold text-teal hover:text-teal-deep transition-colors"
-                  >
-                    View services
-                    <ArrowRight size={14} strokeWidth={1.75} />
-                  </Link>
+
+                  {/* Card Body */}
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-h3 text-ink text-[1.25rem] font-semibold">
+                        {service.title}
+                      </h3>
+                      <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted">
+                        {service.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-hairline/40">
+                      <Link
+                        href="/services"
+                        className="inline-flex items-center gap-1.5 text-[0.875rem] font-semibold text-teal hover:text-teal-deep transition-colors"
+                      >
+                        View Services
+                        <ArrowRight
+                          size={15}
+                          strokeWidth={2}
+                          className="transition-transform duration-200 group-hover:translate-x-1"
+                        />
+                      </Link>
+                    </div>
+                  </div>
                 </article>
               </Reveal>
             );
@@ -221,41 +416,65 @@ function ServiceCategories() {
   );
 }
 
-/* ----------------------------------------------------------------
-   BRIDAL BAND - full-width gold band + sheen drift
-   ---------------------------------------------------------------- */
-function BridalBand() {
+/* =================================================================
+   4. BRIDAL & OCCASION BANNER - Full-width gold section with subtle sheen
+   ================================================================= */
+function BridalBannerSection() {
   return (
-    <section aria-labelledby="bridal-h" className="px-3 sm:px-4">
+    <section id="bridal-banner" aria-labelledby="bridal-heading" className="px-3 sm:px-6">
       <div className="container-atelier">
-        <div className="relative overflow-hidden rounded-card bg-gold px-6 py-12 sm:px-12 sm:py-16">
-          {/* Sheen drift - the ONE allowed ambient motion */}
+        <div className="relative overflow-hidden rounded-card bg-gold px-6 py-12 sm:px-12 sm:py-16 text-white shadow-[0_14px_36px_rgba(161,98,7,0.22)]">
+          {/* Ambient Sheen Drift */}
           <div className="sheen-drift" aria-hidden="true" />
 
           {/* Corner feather accent */}
-          <div className="absolute top-4 right-4 opacity-30" aria-hidden="true">
-            <FeatherMotif size={36} className="text-white" />
+          <div className="absolute top-5 right-5 opacity-25" aria-hidden="true">
+            <FeatherMotif size={44} className="text-white" />
           </div>
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 items-center">
-            <Reveal>
-              <div>
-                <p className="font-sans font-semibold uppercase tracking-[0.18em] text-[0.8125rem] text-white/85">
-                  By appointment
-                </p>
-                <h2 id="bridal-h" className="mt-3 font-display font-semibold text-white text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.08]">
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-8">
+              <Reveal>
+                <span className="inline-block font-sans font-semibold uppercase tracking-[0.2em] text-[0.8125rem] text-white/90">
+                  BY APPOINTMENT ONLY
+                </span>
+                <h2
+                  id="bridal-heading"
+                  className="mt-3 font-serif font-semibold text-white text-[clamp(2.25rem,4.5vw,3.5rem)] leading-[1.12]"
+                >
                   Bridal &amp; Occasion Glamour
                 </h2>
-                <p className="mt-4 text-white/90 text-[1.0625rem] leading-relaxed max-w-[52ch]">
-                  Makeup, hair and henna crafted for your big day - booked by appointment only.
+                <p className="mt-4 text-white/95 text-[1.0625rem] sm:text-[1.125rem] leading-relaxed max-w-[55ch]">
+                  Makeup, hair and henna crafted for your big day — booked by appointment only.
                 </p>
-              </div>
-            </Reveal>
-            <Reveal delay={120} className="flex lg:justify-end">
-              <Button as="link" href="/contact" variant="ghost" size="lg">
-                Book an Appointment
-              </Button>
-            </Reveal>
+                <div className="mt-8">
+                  <Button
+                    as="link"
+                    href="/contact"
+                    variant="ghost"
+                    size="lg"
+                    className="bg-porcelain text-ink hover:bg-ivory hover:text-teal font-semibold shadow-md"
+                  >
+                    Book an Appointment
+                  </Button>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Bridal Image Asset */}
+            <div className="lg:col-span-4 relative flex justify-center">
+              <Reveal delay={120}>
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-card overflow-hidden border-2 border-white/40 shadow-xl">
+                  <Image
+                    src="/salon/bridal-still-life.png"
+                    alt="Bridal jewelry, henna and wedding preparation essentials at Karthikeya Lavish Looks"
+                    fill
+                    sizes="(max-width: 768px) 240px, 300px"
+                    className="object-cover"
+                  />
+                </div>
+              </Reveal>
+            </div>
           </div>
         </div>
       </div>
@@ -263,50 +482,63 @@ function BridalBand() {
   );
 }
 
-/* ----------------------------------------------------------------
-   GALLERY STRIP - 6 transformation tiles
-   ---------------------------------------------------------------- */
-function GalleryStrip() {
+/* =================================================================
+   5. TRANSFORMATION GALLERY PREVIEW - Real salon looks with hover zoom
+   ================================================================= */
+function GalleryPreviewSection() {
   return (
-    <section aria-labelledby="gallery-h" className="py-[clamp(3.5rem,9vw,5.5rem)] sm:py-[88px] bg-ivory">
+    <section
+      id="gallery-preview"
+      aria-labelledby="gallery-heading"
+      className="py-16 sm:py-24 bg-ivory"
+    >
       <div className="container-atelier">
-        <Reveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div className="max-w-[560px]">
-            <Kicker>Fresh from the chair</Kicker>
-            <h2 id="gallery-h" className="text-h2 text-ink mt-3">
-              Real transformations, real craft.
+        <Reveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5">
+          <div className="max-w-[580px]">
+            <Kicker>REAL RESULTS</Kicker>
+            <h2 id="gallery-heading" className="text-h2 text-ink mt-3">
+              Transformations Worth Remembering
             </h2>
+            <p className="mt-3 text-muted text-[1.0625rem] leading-relaxed">
+              Explore real looks across hair, makeup, mehndi and men&apos;s grooming.
+            </p>
           </div>
-          <Button as="link" href="/gallery" variant="ghost" size="md">
-            View full gallery
-            <ArrowRight size={14} strokeWidth={1.75} />
-          </Button>
+          <div>
+            <Button
+              as="link"
+              href="/gallery"
+              variant="ghost"
+              size="md"
+              className="border border-hairline/80 hover:border-teal/50"
+            >
+              View Full Gallery
+              <ArrowRight size={15} strokeWidth={2} />
+            </Button>
+          </div>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
-          {homeGalleryTiles.map((tile, i) => (
-            <Reveal
-              key={tile.slug}
-              delay={(i % 3) * 80}
-              className={i === 0 || i === 5 ? "md:col-span-1" : ""}
-            >
-              <article className="group">
-                <div className="relative aspect-square rounded-img overflow-hidden bg-sand">
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+          {transformationGallery.map((item, index) => (
+            <Reveal key={item.src} delay={index * 60}>
+              <figure className="group flex flex-col h-full">
+                <div className="relative aspect-square rounded-img overflow-hidden bg-sand shadow-sm border border-hairline/50">
                   <Image
-                    src={tile.src}
-                    alt={tile.caption}
+                    src={item.src}
+                    alt={item.alt}
                     fill
                     sizes="(max-width: 768px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                   />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2.5 py-1 rounded-pill bg-porcelain/90 backdrop-blur-sm text-[0.6875rem] font-bold uppercase tracking-wider text-teal shadow-xs">
+                      {item.category}
+                    </span>
+                  </div>
                 </div>
-                <p className="mt-3 text-caption text-ink/80">{tile.caption}</p>
-                {tile.generated && (
-                  <p className="text-[0.6875rem] uppercase tracking-[0.18em] text-muted/70 mt-0.5">
-                    Illustration
-                  </p>
-                )}
-              </article>
+                <figcaption className="mt-3 text-caption text-ink font-medium">
+                  {item.caption}
+                </figcaption>
+              </figure>
             </Reveal>
           ))}
         </div>
@@ -315,73 +547,104 @@ function GalleryStrip() {
   );
 }
 
-/* ----------------------------------------------------------------
-   WHY ROW - three promises
-   ---------------------------------------------------------------- */
-function WhyRow() {
+/* =================================================================
+   6. WHY KARTHIKEYA LAVISH LOOKS - Editorial 4-pillar section
+   ================================================================= */
+function WhySection() {
   return (
-    <section aria-labelledby="why-h" className="bg-sand py-[clamp(3.5rem,9vw,5.5rem)] sm:py-[88px]">
+    <section
+      id="why-karthikeya"
+      aria-labelledby="why-heading"
+      className="bg-sand border-y border-hairline/60 py-16 sm:py-24"
+    >
       <div className="container-atelier">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-start">
+        <div className="text-center max-w-[700px] mx-auto">
           <Reveal>
-            <Kicker>Why the chair</Kicker>
-            <h2 id="why-h" className="text-h2 text-ink mt-3">
-              Three things we will not compromise on.
+            <Kicker>THE ATELIER STANDARD</Kicker>
+            <h2 id="why-heading" className="text-h2 text-ink mt-3">
+              Beauty, Detail &amp; Confidence — In One Place
             </h2>
-            <p className="mt-4 text-muted leading-relaxed">
-              We will not list certifications we cannot show you. These are the three promises we can stand behind today.
+            <p className="mt-3 text-muted text-[1.0625rem] leading-relaxed">
+              We focus on thoughtful craftsmanship and dedicated care so every guest leaves looking and feeling exceptional.
             </p>
           </Reveal>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-1 gap-5">
-            {promises.map((p, i) => {
-              const Icon = iconMap[p.icon as keyof typeof iconMap] ?? ShieldCheck;
-              return (
-                <Reveal key={p.title} delay={i * 100}>
-                  <article className="flex gap-5 items-start rounded-card bg-porcelain border border-hairline/60 p-6">
-                    <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-pill bg-sand text-teal">
-                      <Icon size={22} strokeWidth={1.5} />
-                    </div>
-                    <div>
-                      <h3 className="text-h3 text-ink">{p.title}</h3>
-                      <p className="mt-2 text-muted leading-relaxed">{p.body}</p>
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
+          {whyFeatures.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <Reveal key={item.title} delay={index * 80}>
+                <article className="h-full flex gap-5 items-start rounded-card bg-porcelain border border-hairline/70 p-7 shadow-[0_8px_20px_rgba(34,48,45,0.05)] transition-all hover:shadow-[0_12px_28px_rgba(34,48,45,0.09)]">
+                  <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-pill bg-sand text-teal border border-hairline/50">
+                    <Icon size={22} strokeWidth={1.6} />
+                  </div>
+                  <div>
+                    <h3 className="text-h3 text-ink text-[1.2rem] font-semibold">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-[0.9375rem] text-muted leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-/* ----------------------------------------------------------------
-   REVIEWS - stat + attribution only, no fabricated quotes
-   ---------------------------------------------------------------- */
-function Reviews() {
+/* =================================================================
+   7. SOCIAL PROOF - Verified Rating Focus (No Fake Testimonials)
+   ================================================================= */
+function SocialProofSection() {
   return (
-    <section aria-labelledby="reviews-h" className="py-[clamp(3.5rem,9vw,5.5rem)] sm:py-[88px] bg-ivory">
+    <section
+      id="social-proof"
+      aria-labelledby="social-proof-heading"
+      className="py-16 sm:py-24 bg-ivory"
+    >
       <div className="container-atelier">
-        <Reveal className="rounded-card bg-porcelain border border-hairline/60 p-8 sm:p-12 text-center max-w-[720px] mx-auto shadow-[0_8px_24px_rgba(34,48,45,0.08)]">
+        <Reveal className="rounded-card bg-porcelain border border-hairline/80 p-8 sm:p-14 text-center max-w-[740px] mx-auto shadow-[0_10px_30px_rgba(34,48,45,0.07)]">
           <div className="flex items-center justify-center gap-1 mb-4">
-            {[0, 1, 2, 3, 4].map((i) => (
-              <Star key={i} size={22} className="text-gold fill-gold" strokeWidth={1.5} />
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                size={24}
+                className="text-gold fill-gold"
+                strokeWidth={1.5}
+              />
             ))}
           </div>
-          <p className="font-sans font-bold text-[2.75rem] leading-none text-gold">
-            {reviews.stat}
-          </p>
-          <h2 id="reviews-h" className="mt-3 text-h3 text-ink">
-            from {reviews.count} {reviews.platform} reviews
+          <div className="font-sans font-bold text-[3rem] sm:text-[3.5rem] leading-none text-gold">
+            5.0★
+          </div>
+          <h2
+            id="social-proof-heading"
+            className="mt-3.5 text-h3 text-ink text-[1.375rem] sm:text-[1.5rem]"
+          >
+            Rated 5.0 on JustDial
           </h2>
-          <p className="mt-4 text-muted leading-relaxed max-w-[48ch] mx-auto">
-            {reviews.note}
+          <p className="mt-2 text-muted font-medium text-[1.0625rem]">
+            11 Reviews
           </p>
-          <div className="mt-6">
-            <Button as="link" href={salon.rating.url} variant="ghost" size="md">
-              {reviews.ctaLabel}
+          <p className="mt-4 text-muted/80 text-[0.9375rem] leading-relaxed max-w-[48ch] mx-auto">
+            Verified rating based on authentic customer reviews on JustDial for Karthikeya Lavish Looks in Warangal.
+          </p>
+          <div className="mt-7">
+            <Button
+              as="link"
+              href={salon.rating.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="ghost"
+              size="md"
+              className="border border-hairline hover:border-gold/60 text-ink"
+            >
+              Verify on JustDial
               <ArrowRight size={14} strokeWidth={1.75} />
             </Button>
           </div>
@@ -391,24 +654,37 @@ function Reviews() {
   );
 }
 
-/* ----------------------------------------------------------------
-   BOOKING CTA BAND - sand band, display headline + CTA
-   ---------------------------------------------------------------- */
-function BookingCTA() {
+/* =================================================================
+   8. FINAL BOOKING CTA - Ready for Your Next Look?
+   ================================================================= */
+function FinalBookingCTASection() {
   return (
-    <section aria-labelledby="cta-h" className="bg-sand py-[clamp(3.5rem,9vw,5.5rem)] sm:py-[88px]">
+    <section
+      id="final-cta"
+      aria-labelledby="cta-heading"
+      className="bg-sand border-t border-hairline/70 py-16 sm:py-24"
+    >
       <div className="container-atelier">
-        <Reveal className="text-center max-w-[640px] mx-auto">
-          <FeatherMotif size={28} className="mx-auto mb-4" />
-          <h2 id="cta-h" className="text-display text-ink">
-            Ready when you are.
+        <Reveal className="text-center max-w-[660px] mx-auto">
+          <FeatherMotif size={32} className="mx-auto mb-4 text-gold" />
+          <h2 id="cta-heading" className="text-display text-ink text-[clamp(2.25rem,4.8vw,3.75rem)] font-serif font-semibold leading-tight">
+            Ready for Your Next Look?
           </h2>
           <p className="mt-4 text-[1.0625rem] text-muted leading-relaxed">
-            Walk in or book ahead - the chair is waiting.
+            From everyday grooming to bridal glamour, let Karthikeya Lavish Looks create a look that feels like you.
           </p>
-          <div className="mt-7">
-            <Button as="link" href="/contact" size="lg">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Button as="link" href="/contact" size="lg" className="shadow-md">
               Book an Appointment
+            </Button>
+            <Button
+              as="link"
+              href="/services"
+              variant="ghost"
+              size="lg"
+              className="border border-hairline/80 hover:border-teal/50"
+            >
+              Explore Services
             </Button>
           </div>
         </Reveal>

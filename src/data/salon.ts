@@ -24,17 +24,17 @@ export const salon = {
     "Telangana 506002",
   ],
   plusCode: "XJJ7+7Q Warangal",
-  // Hours - Monday verified, full week [CONFIRM]
+  // Hours - Monday verified, full week to be confirmed
   hours: [
-    { day: "Monday", time: "8:00 AM - 9:00 PM", verified: true },
-    { day: "Tuesday", time: "[CONFIRM]", verified: false },
-    { day: "Wednesday", time: "[CONFIRM]", verified: false },
-    { day: "Thursday", time: "[CONFIRM]", verified: false },
-    { day: "Friday", time: "[CONFIRM]", verified: false },
-    { day: "Saturday", time: "[CONFIRM]", verified: false },
-    { day: "Sunday", time: "[CONFIRM]", verified: false },
+    { day: "Monday", time: "8:00 AM – 9:00 PM", verified: true },
+    { day: "Tuesday", time: "Hours to be confirmed", verified: false },
+    { day: "Wednesday", time: "Hours to be confirmed", verified: false },
+    { day: "Thursday", time: "Hours to be confirmed", verified: false },
+    { day: "Friday", time: "Hours to be confirmed", verified: false },
+    { day: "Saturday", time: "Hours to be confirmed", verified: false },
+    { day: "Sunday", time: "Hours to be confirmed", verified: false },
   ],
-  hoursNote: "Monday 8 AM - 9 PM verified. Full-week hours to be confirmed before publishing any 'open daily' claim.",
+  hoursNote: "Verified Monday Hours: 8:00 AM – 9:00 PM. Remaining days to be confirmed.",
   // Rating - verified JustDial
   rating: {
     stars: 5.0,
@@ -60,37 +60,37 @@ export const serviceCategories: ServiceCategory[] = [
     slug: "hair",
     name: "Hair",
     icon: "scissors",
-    description: "Cuts, colour, treatments and styling for women and men.",
+    description: "Professional cuts, styling and hair transformations.",
   },
   {
     slug: "skin-facials",
     name: "Skin & Facials",
     icon: "sparkles",
-    description: "Cleanups, facials and skin therapy tuned to your tone.",
+    description: "Beauty and skincare treatments tailored to your needs.",
   },
   {
     slug: "makeup",
     name: "Makeup",
     icon: "brush",
-    description: "Party, engagement and bridal makeup by appointment.",
+    description: "Makeup looks for occasions, celebrations and special moments.",
   },
   {
     slug: "nails",
     name: "Nails",
     icon: "hand",
-    description: "Manicure, pedicure and nail art in a hygienic setup.",
+    description: "Clean, polished and occasion-ready nail services.",
   },
   {
     slug: "mehndi-bridal",
     name: "Mehndi & Bridal",
     icon: "flower2",
-    description: "Bridal henna and occasion mehndi, hand-applied.",
+    description: "Mehndi, bridal makeup and occasion-ready beauty services.",
   },
   {
     slug: "mens-grooming",
     name: "Men's Grooming",
     icon: "user",
-    description: "Haircuts, beard shaping and clean shaves for men.",
+    description: "Professional hair, beard and grooming services for men.",
   },
 ];
 
@@ -246,6 +246,7 @@ export const promises = [
 
 // Nav links
 export const navLinks = [
+  { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/bridal", label: "Bridal" },
   { href: "/gallery", label: "Gallery" },
