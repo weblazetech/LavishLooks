@@ -40,7 +40,7 @@ export const salon = {
     stars: 5.0,
     count: 11,
     platform: "JustDial",
-    url: "https://www.justdial.com/", // TODO: replace with the actual JustDial listing URL before launch
+    url: "https://www.justdial.com/Warangal/Lavish-Looks-The-Family-Salon-Hair-Beauty-Kashibugga-Society-Colony/9999PX870-X870-250822183301-H4F9_BZDET",
   },
   // Map embed - centered on the plus code
   mapEmbedUrl:

@@ -506,7 +506,7 @@ function RealWorkInstagramSection() {
             </p>
             <div className="mt-6">
               <Button
-                as="link"
+                as="a"
                 href={salon.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"

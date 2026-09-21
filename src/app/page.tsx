@@ -636,7 +636,7 @@ function SocialProofSection() {
           </p>
           <div className="mt-7">
             <Button
-              as="link"
+              as="a"
               href={salon.rating.url}
               target="_blank"
               rel="noopener noreferrer"

@@ -39,10 +39,11 @@ type AsLink = CommonProps & {
   href: string;
 };
 
-type AsAnchor = CommonProps & {
-  as: "a";
-  href: string;
-};
+type AsAnchor = CommonProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+    as: "a";
+    href: string;
+  };
 
 type ButtonProps = AsButton | AsLink | AsAnchor;
 
