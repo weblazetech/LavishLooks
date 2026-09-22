@@ -32,7 +32,7 @@ export default function SignatureServices() {
       subtitle: "Heritage & Symbolism",
       description:
         "Fine-line henna application blending traditional royal wedding motifs with contemporary floral jaali work. Deep, dark natural stains prepared with organic care.",
-      image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1200&auto=format&fit=crop",
+      image: "/images/services/handcrafted-mehndi.jpg",
       link: "/services#mehndi-bridal",
       aspect: "landscape",
     },
