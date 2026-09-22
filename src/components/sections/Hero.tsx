@@ -29,7 +29,7 @@ export default function Hero() {
         }}
       >
         <Image
-          src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=2000&auto=format&fit=crop"
+          src="/images/hero-salon.jpg"
           alt="Karthikeya Lavish Looks Luxury Salon Atmosphere"
           fill
           priority

@@ -179,7 +179,7 @@ export default function BrandIntro() {
               }}
             >
               <Image
-                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1200&auto=format&fit=crop"
+                src="/images/brand-intro-styling.jpg"
                 alt="Hair Styling Craftsmanship at Karthikeya Lavish Looks"
                 fill
                 sizes="(max-width: 768px) 90vw, 460px"
