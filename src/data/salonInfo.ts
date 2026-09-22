@@ -35,6 +35,8 @@ export interface SalonInfo {
     phoneFormatted: string;
   };
   mapUrl: string;
+  googleMapsPlaceUrl: string;
+  mapEmbedUrl: string;
 }
 
 export const SALON_INFO: SalonInfo = {
@@ -73,5 +75,7 @@ export const SALON_INFO: SalonInfo = {
     phone: "+91 89770 08676",
     phoneFormatted: "+91 89770 08676",
   },
-  mapUrl: "https://www.google.com/maps/search/?api=1&query=XJJ7%2B7Q+Warangal",
+  mapUrl: "https://maps.app.goo.gl/xKCMnDyKg84kBKg96",
+  googleMapsPlaceUrl: "https://maps.app.goo.gl/xKCMnDyKg84kBKg96",
+  mapEmbedUrl: "https://maps.google.com/maps?q=Karthikeya+Lavish+looks,+Road+No.+14A,+Opp:+O+City+Main+Rd,+Kashibugga+Society+Colony,+Warangal,+Telangana+506002&t=&z=17&ie=UTF8&iwloc=&output=embed",
 };

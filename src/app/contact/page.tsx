@@ -463,19 +463,54 @@ export default function ContactPage() {
                 style={{
                   borderRadius: "16px",
                   overflow: "hidden",
-                  height: "320px",
+                  display: "flex",
+                  flexDirection: "column",
                   position: "relative",
                 }}
               >
-                <iframe
-                  title="Google Maps Exact Location"
-                  src="https://maps.google.com/maps?q=XJJ7%2B7Q,+Kashibugga,+Warangal,+Telangana+506002&t=&z=17&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(85%) contrast(110%)" }}
-                  allowFullScreen={false}
-                  loading="lazy"
-                />
+                <div style={{ height: "280px", width: "100%" }}>
+                  <iframe
+                    title="Google Maps Exact Location"
+                    src={SALON_INFO.mapEmbedUrl}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(85%) contrast(110%)" }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                  />
+                </div>
+                <div
+                  style={{
+                    padding: "1rem 1.4rem",
+                    backgroundColor: "var(--teal-900)",
+                    borderTop: "1px solid var(--gold-border)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: "0.8rem",
+                  }}
+                >
+                  <span style={{ fontSize: "0.85rem", color: "var(--ivory-100)" }}>
+                    Opposite O City Main Road, Warangal
+                  </span>
+                  <a
+                    href={SALON_INFO.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      fontSize: "0.84rem",
+                      color: "var(--gold-300)",
+                      fontWeight: 600,
+                    }}
+                  >
+                    <span>Open in Google Maps</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
