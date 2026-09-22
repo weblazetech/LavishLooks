@@ -377,8 +377,41 @@ export default function ContactPage() {
                     </div>
                   </div>
 
+                  {/* Phone Direct */}
+                  <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
+                    <Phone size={20} style={{ color: "var(--gold-400)", flexShrink: 0 }} />
+                    <div style={{ fontSize: "0.92rem", color: "var(--ivory-100)" }}>
+                      <a
+                        href={`tel:${SALON_INFO.social.phone.replace(/\s+/g, "")}`}
+                        style={{ color: "var(--ivory-50)", fontWeight: 600, fontSize: "1.05rem" }}
+                      >
+                        {SALON_INFO.social.phoneFormatted}
+                      </a>
+                      <p style={{ fontSize: "0.78rem", color: "var(--gold-300)" }}>Direct Call & Inquiries</p>
+                    </div>
+                  </div>
+
                   {/* Social & WhatsApp Buttons */}
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.8rem", paddingTop: "0.5rem" }}>
+                    <a
+                      href={`tel:${SALON_INFO.social.phone.replace(/\s+/g, "")}`}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        padding: "0.65rem 1.2rem",
+                        borderRadius: "var(--radius-full)",
+                        border: "1px solid var(--gold-border)",
+                        background: "rgba(13, 49, 49, 0.6)",
+                        color: "var(--ivory-50)",
+                        fontSize: "0.84rem",
+                        fontWeight: 600,
+                      }}
+                    >
+                      <Phone size={16} style={{ color: "var(--gold-400)" }} />
+                      <span>Call Now</span>
+                    </a>
+
                     <a
                       href={SALON_INFO.social.whatsappLink}
                       target="_blank"
@@ -424,7 +457,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map Embed */}
+              {/* Map Embed with Exact Location */}
               <div
                 className="editorial-glass-card"
                 style={{
@@ -435,8 +468,8 @@ export default function ContactPage() {
                 }}
               >
                 <iframe
-                  title="Google Maps Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15187.319762699317!2d79.6050!3d17.9750!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a334f59e875e5eb%3A0x88981f9a0c6a51d8!2sKashibugga%2C%20Warangal%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  title="Google Maps Exact Location"
+                  src="https://maps.google.com/maps?q=XJJ7%2B7Q,+Kashibugga,+Warangal,+Telangana+506002&t=&z=17&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(85%) contrast(110%)" }}

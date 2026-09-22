@@ -152,7 +152,28 @@ export default function LocationSection() {
               </div>
 
               {/* Direct Links */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginBottom: "2rem" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.8rem", marginBottom: "2rem" }}>
+                <a
+                  href={`tel:${SALON_INFO.social.phone.replace(/\s+/g, "")}`}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.6rem 1.15rem",
+                    borderRadius: "var(--radius-full)",
+                    border: "1px solid var(--gold-border)",
+                    background: "rgba(13, 49, 49, 0.6)",
+                    color: "var(--ivory-50)",
+                    fontSize: "0.82rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.05em",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  <Phone size={15} style={{ color: "var(--gold-400)" }} />
+                  <span>{SALON_INFO.social.phoneFormatted}</span>
+                </a>
+
                 <a
                   href={SALON_INFO.social.whatsappLink}
                   target="_blank"
@@ -169,6 +190,7 @@ export default function LocationSection() {
                     fontSize: "0.82rem",
                     fontWeight: 600,
                     letterSpacing: "0.05em",
+                    transition: "all 0.2s ease",
                   }}
                 >
                   <MessageSquare size={15} style={{ color: "var(--gold-400)" }} />
@@ -191,6 +213,7 @@ export default function LocationSection() {
                     fontSize: "0.82rem",
                     fontWeight: 600,
                     letterSpacing: "0.05em",
+                    transition: "all 0.2s ease",
                   }}
                 >
                   <InstagramIcon size={15} />
@@ -219,11 +242,11 @@ export default function LocationSection() {
               position: "relative",
             }}
           >
-            {/* Embedded Interactive Map */}
+            {/* Embedded Interactive Map with Exact Location */}
             <div style={{ position: "relative", flexGrow: 1, width: "100%", minHeight: "360px" }}>
               <iframe
-                title="Karthikeya Lavish Looks Map Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15187.319762699317!2d79.6050!3d17.9750!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a334f59e875e5eb%3A0x88981f9a0c6a51d8!2sKashibugga%2C%20Warangal%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                title="Karthikeya Lavish Looks Exact Map Location"
+                src="https://maps.google.com/maps?q=XJJ7%2B7Q,+Kashibugga,+Warangal,+Telangana+506002&t=&z=17&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(85%) contrast(110%)" }}

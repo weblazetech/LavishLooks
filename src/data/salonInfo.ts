@@ -68,10 +68,10 @@ export const SALON_INFO: SalonInfo = {
   social: {
     instagramHandle: "@k_lavishlooks",
     instagramUrl: "https://www.instagram.com/k_lavishlooks",
-    whatsappNumber: "919000000000",
-    whatsappLink: "https://wa.me/919000000000?text=Hello%20Karthikeya%20Lavish%20Looks,%20I%20would%20like%20to%20inquire%20about%20booking%20an%20appointment.",
-    phone: "+91 90000 00000",
-    phoneFormatted: "+91 90000 00000",
+    whatsappNumber: "918977008676",
+    whatsappLink: "https://wa.me/918977008676?text=Hello%20Karthikeya%20Lavish%20Looks,%20I%20would%20like%20to%20inquire%20about%20booking%20an%20appointment.",
+    phone: "+91 89770 08676",
+    phoneFormatted: "+91 89770 08676",
   },
-  mapUrl: "https://maps.google.com/?q=Karthikeya+Lavish+Looks+Road+No+14A+Kashibugga+Warangal",
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=XJJ7%2B7Q+Warangal",
 };

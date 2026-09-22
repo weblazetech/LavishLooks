@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { MapPin, Clock, MessageSquare, ArrowUpRight } from "lucide-react";
+import { MapPin, Clock, MessageSquare, ArrowUpRight, Phone } from "lucide-react";
 import InstagramIcon from "@/components/ui/InstagramIcon";
 import { SALON_INFO } from "@/data/salonInfo";
 
@@ -227,6 +227,23 @@ export default function Footer() {
                   <p>{SALON_INFO.address.area}, {SALON_INFO.address.city}, {SALON_INFO.address.state} {SALON_INFO.address.pincode}</p>
                   <p style={{ color: "var(--gold-300)", marginTop: "2px" }}>Plus Code: {SALON_INFO.address.plusCode}</p>
                 </div>
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                <Phone size={18} style={{ color: "var(--gold-400)", flexShrink: 0 }} />
+                <a
+                  href={`tel:${SALON_INFO.social.phone.replace(/\s+/g, "")}`}
+                  className="footer-phone-link"
+                  style={{
+                    fontSize: "0.92rem",
+                    color: "var(--ivory-50)",
+                    fontWeight: 600,
+                    letterSpacing: "0.03em",
+                    transition: "color 0.2s ease",
+                  }}
+                >
+                  {SALON_INFO.social.phoneFormatted}
+                </a>
               </div>
 
               <div style={{ display: "flex", alignItems: "flex-start", gap: "0.6rem" }}>
