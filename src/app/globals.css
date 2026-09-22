@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette - Deep Teal */
+  --teal-950: #041212;
+  --teal-900: #071E1E;
+  --teal-850: #092525;
+  --teal-800: #0D3131;
+  --teal-700: #124040;
+  --teal-600: #185454;
+  --teal-500: #206E6E;
+
+  /* Color Palette - Champagne Gold */
+  --gold-200: #F3E5C8;
+  --gold-300: #E6CE9F;
+  --gold-400: #D8BD88;
+  --gold-500: #C5A870;
+  --gold-600: #A88B52;
+  --gold-700: #886E3C;
+  --gold-border: rgba(197, 168, 112, 0.28);
+  --gold-border-bright: rgba(216, 189, 136, 0.6);
+  --gold-gradient: linear-gradient(135deg, #F3E5C8 0%, #C5A870 50%, #9B7E45 100%);
+  --gold-sheen-gradient: linear-gradient(90deg, transparent 0%, rgba(243, 229, 200, 0.15) 45%, rgba(216, 189, 136, 0.4) 50%, rgba(243, 229, 200, 0.15) 55%, transparent 100%);
+
+  /* Warm Ivory / Cream */
+  --ivory-50: #FDFBF7;
+  --ivory-100: #F8F4EC;
+  --ivory-200: #EFE8DA;
+  --ivory-300: #E2D7C1;
+
+  /* Neutrals & Dark Tones */
+  --charcoal-900: #0E1212;
+  --charcoal-800: #161D1D;
+  --charcoal-700: #242D2D;
+  --text-primary-dark: #F8F4EC;
+  --text-muted-dark: #98A5A5;
+  --text-primary-light: #161D1D;
+  --text-muted-light: #5A6666;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Geometry & Shadows */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-subtle: 0 4px 20px -2px rgba(4, 18, 18, 0.08);
+  --shadow-elevated: 0 12px 36px -4px rgba(4, 18, 18, 0.25);
+  --shadow-gold: 0 8px 32px rgba(197, 168, 112, 0.15);
+
+  --max-width: 1280px;
+  --header-height: 80px;
+}
+
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--teal-950);
+  color: var(--text-primary-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  selection-background-color: var(--gold-500);
+  selection-color: var(--teal-950);
+}
+
+::selection {
+  background-color: var(--gold-500);
+  color: var(--teal-950);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Typography Utilities */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.gold-gradient-text {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.section-spacing {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+  }
+}
+
+/* Luxury Wordmark */
+.brand-wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.05;
+  letter-spacing: normal;
+}
+
+.brand-wordmark .wordmark-karthikeya {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  margin-bottom: 2px;
+}
+
+.brand-wordmark .wordmark-lavish-looks {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ivory-50);
+}
+
+/* Dotted Leader for Services */
+.service-dotted-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(197, 168, 112, 0.12);
+  transition: all 0.25s ease;
+}
+
+.service-dotted-row:hover {
+  border-bottom-color: var(--gold-border-bright);
+}
+
+.service-item-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--ivory-50);
+  white-space: normal;
+  flex-shrink: 0;
+  font-weight: 400;
+}
+
+.service-dotted-filler {
+  flex-grow: 1;
+  margin: 0 1rem;
+  border-bottom: 1px dotted rgba(216, 189, 136, 0.45);
+  position: relative;
+  top: -4px;
+}
+
+.service-item-price {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gold-400);
+  flex-shrink: 0;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-sm);
+  background: rgba(13, 49, 49, 0.4);
+}
+
+/* Bridal Sheen Keyframe & Container */
+.bridal-sheen-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.bridal-sheen-overlay {
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 300%;
+  height: 200%;
+  background: var(--gold-sheen-gradient);
+  pointer-events: none;
+  opacity: 0.4;
+  transform: rotate(20deg);
+  animation: goldSheenSlide 14s infinite linear;
+}
+
+@keyframes goldSheenSlide {
+  0% {
+    transform: translateX(-60%) rotate(20deg);
+  }
+  100% {
+    transform: translateX(60%) rotate(20deg);
+  }
+}
+
+/* Editorial Glass Card */
+.editorial-glass-card {
+  background: rgba(13, 49, 49, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-glass-card:hover {
+  border-color: var(--gold-border-bright);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Editorial Tag */
+.editorial-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  background: rgba(13, 49, 49, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--gold-400);
+  outline-offset: 3px;
+}
+
+.footer-nav-link:hover {
+  color: var(--gold-300) !important;
+}
+
+.gallery-view-more-btn:hover {
+  background: var(--gold-gradient) !important;
+  color: var(--teal-950) !important;
+}
+
+@media (min-width: 768px) {
+  .signature-row-reversed .signature-img-col {
+    order: 2;
+  }
+  .signature-row-reversed .signature-text-col {
+    order: 1;
+  }
+}
