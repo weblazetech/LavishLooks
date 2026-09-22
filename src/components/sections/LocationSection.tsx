@@ -246,7 +246,7 @@ export default function LocationSection() {
             <div style={{ position: "relative", flexGrow: 1, width: "100%", minHeight: "360px" }}>
               <iframe
                 title="Karthikeya Lavish Looks Exact Map Location"
-                src="https://maps.google.com/maps?q=XJJ7%2B7Q,+Kashibugga,+Warangal,+Telangana+506002&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                src={SALON_INFO.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(85%) contrast(110%)" }}
