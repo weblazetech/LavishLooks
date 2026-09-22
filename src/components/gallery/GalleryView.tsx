@@ -105,6 +105,7 @@ export default function GalleryView() {
                     category={item.category}
                     tag={item.tag}
                     aspectRatio={isWide ? "landscape" : "portrait"}
+                    objectPosition={item.objectPosition || "top"}
                     className="rounded-2xl h-full"
                   />
 

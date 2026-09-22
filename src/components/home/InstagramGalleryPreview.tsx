@@ -62,6 +62,7 @@ export default function InstagramGalleryPreview() {
                   category={item.category}
                   tag={item.tag}
                   aspectRatio="portrait"
+                  objectPosition={item.objectPosition || "top"}
                   className="rounded-2xl"
                 />
 

@@ -85,6 +85,7 @@ export default function Hero() {
                 tag="Real @k_lavishlooks Work"
                 priority={true}
                 aspectRatio="portrait"
+                objectPosition="top"
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="w-full shadow-2xl rounded-2xl"
               />

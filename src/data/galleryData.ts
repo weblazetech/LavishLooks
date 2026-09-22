@@ -5,6 +5,7 @@ export interface GalleryItem {
   src: string;
   instagramPostUrl?: string;
   aspectRatio: "portrait" | "square" | "landscape";
+  objectPosition?: "top" | "center" | "bottom";
   featuredOnHome?: boolean;
   bentoSpan?: "normal" | "wide";
   tag: string;
@@ -19,6 +20,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/hair-01.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "landscape",
+    objectPosition: "center",
     featuredOnHome: true,
     bentoSpan: "wide",
     tag: "Hair Styling & Dimension",
@@ -31,6 +33,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/bridal-01.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "portrait",
+    objectPosition: "top",
     featuredOnHome: true,
     bentoSpan: "normal",
     tag: "Bridal Artistry",
@@ -43,6 +46,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/mehndi-01.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "portrait",
+    objectPosition: "top",
     featuredOnHome: true,
     bentoSpan: "normal",
     tag: "Henna Design",
@@ -55,6 +59,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/makeup-01.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "portrait",
+    objectPosition: "top",
     featuredOnHome: true,
     bentoSpan: "normal",
     tag: "Party & Occasion",
@@ -67,6 +72,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/grooming-01.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "portrait",
+    objectPosition: "top",
     featuredOnHome: true,
     bentoSpan: "normal",
     tag: "Precision Cut & Beard",
@@ -79,6 +85,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/bridal-02.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "portrait",
+    objectPosition: "top",
     featuredOnHome: true,
     bentoSpan: "normal",
     tag: "Occasion Look",
@@ -91,6 +98,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/hair-02.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "portrait",
+    objectPosition: "top",
     featuredOnHome: false,
     bentoSpan: "normal",
     tag: "Color Artistry",
@@ -103,6 +111,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/makeup-02.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "portrait",
+    objectPosition: "top",
     featuredOnHome: false,
     bentoSpan: "normal",
     tag: "Evening Glow",
@@ -115,6 +124,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/mehndi-02.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "portrait",
+    objectPosition: "top",
     featuredOnHome: false,
     bentoSpan: "normal",
     tag: "Traditional Henna",
@@ -127,6 +137,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     src: "/images/gallery/grooming-02.jpg",
     instagramPostUrl: "https://www.instagram.com/k_lavishlooks/",
     aspectRatio: "landscape",
+    objectPosition: "center",
     featuredOnHome: false,
     bentoSpan: "wide",
     tag: "Beard Sculpt & Styling",

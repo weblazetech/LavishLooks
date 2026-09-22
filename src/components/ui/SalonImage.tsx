@@ -12,6 +12,7 @@ interface SalonImageProps {
   priority?: boolean;
   className?: string;
   aspectRatio?: "portrait" | "square" | "landscape" | "auto";
+  objectPosition?: string;
   onClick?: () => void;
   sizes?: string;
 }
@@ -24,6 +25,7 @@ export default function SalonImage({
   priority = false,
   className = "",
   aspectRatio = "portrait",
+  objectPosition = "center",
   onClick,
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
 }: SalonImageProps) {
@@ -40,6 +42,19 @@ export default function SalonImage({
         return "aspect-[16/10]";
       default:
         return "aspect-[4/5]";
+    }
+  };
+
+  const getPositionClass = () => {
+    switch (objectPosition) {
+      case "top":
+        return "object-top";
+      case "bottom":
+        return "object-bottom";
+      case "center":
+        return "object-center";
+      default:
+        return objectPosition;
     }
   };
 
@@ -60,7 +75,7 @@ export default function SalonImage({
             priority={priority}
             onLoad={() => setIsLoading(false)}
             onError={() => setHasError(true)}
-            className={`object-cover object-center transition-all duration-700 ease-out group-hover:scale-105 ${
+            className={`object-cover ${getPositionClass()} transition-all duration-700 ease-out group-hover:scale-105 ${
               isLoading ? "opacity-0 scale-95" : "opacity-100 scale-100"
             }`}
           />
