@@ -7,29 +7,43 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
 import { SALON_INFO } from "@/data/salonInfo";
 
+export const AVAILABLE_BRIDAL_SERVICES = [
+  "Bridal Makeup (HD / Airbrush)",
+  "Bridal Hair Styling & Flowers",
+  "Bridal Henna / Mehndi",
+  "Saree Draping & Silhouette",
+  "Pre-Bridal Skin & Hair Glow",
+  "Groom Grooming & Styling",
+  "Family / Bridesmaid Makeovers",
+] as const;
+
+export type BridalService = (typeof AVAILABLE_BRIDAL_SERVICES)[number];
+
 export default function BridalPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    phone: string;
+    eventDate: string;
+    eventType: string;
+    servicesRequired: BridalService[];
+    notes: string;
+  }>({
     name: "",
     phone: "",
     eventDate: "",
     eventType: "Muhurtham Wedding",
-    servicesRequired: ["Bridal Makeup", "Bridal Henna"],
+    servicesRequired: [
+      "Bridal Makeup (HD / Airbrush)",
+      "Bridal Henna / Mehndi",
+    ],
     notes: "",
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const availableServices = [
-    "Bridal Makeup (HD / Airbrush)",
-    "Bridal Hair Styling & Flowers",
-    "Bridal Henna / Mehndi",
-    "Saree Draping & Silhouette",
-    "Pre-Bridal Skin & Hair Glow",
-    "Groom Grooming & Styling",
-    "Family / Bridesmaid Makeovers",
-  ];
+  const availableServices = AVAILABLE_BRIDAL_SERVICES;
 
-  const handleCheckboxToggle = (service: string) => {
+  const handleCheckboxToggle = (service: BridalService) => {
     setFormData((prev) => {
       const exists = prev.servicesRequired.includes(service);
       return {
@@ -655,7 +669,16 @@ export default function BridalPage() {
                       return (
                         <div
                           key={service}
+                          role="checkbox"
+                          aria-checked={isChecked}
+                          tabIndex={0}
                           onClick={() => handleCheckboxToggle(service)}
+                          onKeyDown={(e) => {
+                            if (e.key === " " || e.key === "Enter") {
+                              e.preventDefault();
+                              handleCheckboxToggle(service);
+                            }
+                          }}
                           style={{
                             display: "flex",
                             alignItems: "center",
@@ -666,6 +689,15 @@ export default function BridalPage() {
                             border: `1px solid ${isChecked ? "var(--gold-400)" : "var(--gold-border)"}`,
                             cursor: "pointer",
                             transition: "all 0.2s ease",
+                            outline: "none",
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = "var(--gold-300)";
+                            e.currentTarget.style.boxShadow = "0 0 0 2px rgba(197, 168, 112, 0.35)";
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = isChecked ? "var(--gold-400)" : "var(--gold-border)";
+                            e.currentTarget.style.boxShadow = "none";
                           }}
                         >
                           <div
@@ -679,6 +711,7 @@ export default function BridalPage() {
                               justifyContent: "center",
                               backgroundColor: isChecked ? "var(--gold-400)" : "transparent",
                               color: "var(--teal-950)",
+                              flexShrink: 0,
                             }}
                           >
                             {isChecked && <Check size={12} strokeWidth={3} />}
