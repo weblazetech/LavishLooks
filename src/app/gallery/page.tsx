@@ -146,16 +146,8 @@ export default function GalleryPage() {
       {/* Asymmetric Editorial Bento / Masonry Grid */}
       <section className="section-spacing">
         <div className="container">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-              gap: "2.5rem 2rem",
-            }}
-          >
+          <div className="gallery-portfolio-grid">
             {filteredItems.map((item, index) => {
-              const isTall = index % 5 === 0;
-
               return (
                 <div
                   key={item.id}
@@ -164,7 +156,7 @@ export default function GalleryPage() {
                     flexDirection: "column",
                   }}
                 >
-                  {/* Image Card Container with 16px radius, no distortion */}
+                  {/* Image Card Container with locked 4:3 aspect ratio, 16px radius, no distortion */}
                   <div
                     onClick={() => handleOpenLightbox(index)}
                     role="button"
@@ -176,7 +168,7 @@ export default function GalleryPage() {
                     style={{
                       position: "relative",
                       width: "100%",
-                      height: isTall ? "460px" : "360px",
+                      aspectRatio: "4 / 3",
                       borderRadius: "16px",
                       overflow: "hidden",
                       border: "1px solid var(--gold-border)",
@@ -190,7 +182,7 @@ export default function GalleryPage() {
                       src={item.imageUrl}
                       alt={item.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       style={{
                         objectFit: "cover",
                         objectPosition: "center",
@@ -218,12 +210,12 @@ export default function GalleryPage() {
                         padding: "0.28rem 0.75rem",
                         borderRadius: "var(--radius-full)",
                         background: "rgba(4, 18, 18, 0.8)",
-                        backdropFilter: "blur(8px)",
+                        backdropFilter: "blur(6px)",
                         border: "1px solid var(--gold-border)",
-                        fontFamily: "var(--font-sans)",
                         fontSize: "0.72rem",
+                        fontFamily: "var(--font-sans)",
                         fontWeight: 600,
-                        letterSpacing: "0.12em",
+                        letterSpacing: "0.1em",
                         color: "var(--gold-300)",
                         textTransform: "uppercase",
                       }}
@@ -231,47 +223,40 @@ export default function GalleryPage() {
                       {item.category}
                     </div>
 
-                    {/* Hover Zoom Overlay */}
+                    {/* Floating Zoom Action Badge */}
                     <div
                       style={{
                         position: "absolute",
-                        inset: 0,
-                        backgroundColor: "rgba(7, 30, 30, 0.45)",
+                        bottom: "1.2rem",
+                        right: "1.2rem",
+                        width: "42px",
+                        height: "42px",
+                        borderRadius: "var(--radius-full)",
+                        background: "var(--gold-gradient)",
+                        color: "var(--teal-950)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        boxShadow: "0 6px 20px rgba(0,0,0,0.4)",
                         opacity: 0,
-                        transition: "opacity 0.25s ease",
+                        transition: "opacity 0.25s ease, transform 0.25s ease",
                       }}
                       className="hover-badge"
                     >
-                      <div
-                        style={{
-                          width: "48px",
-                          height: "48px",
-                          borderRadius: "var(--radius-full)",
-                          background: "var(--gold-gradient)",
-                          color: "var(--teal-950)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
-                        }}
-                      >
-                        <Eye size={22} />
-                      </div>
+                      <Eye size={20} />
                     </div>
                   </div>
 
-                  {/* Caption & Title Underneath */}
-                  <div style={{ marginTop: "1rem", padding: "0 0.25rem" }}>
+                  {/* Caption & Metadata Underneath */}
+                  <div style={{ marginTop: "1rem", padding: "0 0.2rem" }}>
                     <h3
                       className="font-serif"
                       style={{
                         fontSize: "1.35rem",
                         color: "var(--ivory-50)",
                         fontWeight: 400,
-                        marginBottom: "0.3rem",
+                        marginBottom: "0.35rem",
+                        letterSpacing: "-0.01em",
                       }}
                     >
                       {item.title}
@@ -281,7 +266,7 @@ export default function GalleryPage() {
                         fontFamily: "var(--font-sans)",
                         fontSize: "0.88rem",
                         color: "var(--text-muted-dark)",
-                        lineHeight: 1.5,
+                        lineHeight: 1.55,
                       }}
                     >
                       {item.caption}
@@ -305,14 +290,32 @@ export default function GalleryPage() {
       />
 
       <style jsx>{`
+        .gallery-portfolio-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2.5rem 2rem;
+        }
+
+        @media (min-width: 640px) {
+          .gallery-portfolio-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .gallery-portfolio-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
         .gallery-card-item:hover {
           border-color: var(--gold-border-bright);
-          transform: translateY(-4px);
+          transform: translateY(-5px);
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
         }
 
         .gallery-card-item:hover .gallery-item-image {
-          transform: scale(1.04);
+          transform: scale(1.05);
         }
 
         .gallery-card-item:hover .hover-badge {

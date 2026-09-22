@@ -82,14 +82,8 @@ export default function GalleryPreview() {
           </a>
         </div>
 
-        {/* 6-8 Transformations Grid with 16px Radius, Proper Object-Fit, and Underneath Captions */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "2.5rem 1.8rem",
-          }}
-        >
+        {/* 6-8 Transformations Grid with Locked 4:3 Aspect Ratio and Underneath Captions */}
+        <div className="gallery-preview-grid">
           {previewItems.map((item, index) => (
             <div
               key={item.id}
@@ -98,7 +92,7 @@ export default function GalleryPreview() {
                 flexDirection: "column",
               }}
             >
-              {/* Image Container with 16px radius and no distortion */}
+              {/* Image Container with 16px radius and locked 4:3 photographic aspect ratio */}
               <div
                 onClick={() => handleOpenLightbox(index)}
                 role="button"
@@ -110,7 +104,7 @@ export default function GalleryPreview() {
                 style={{
                   position: "relative",
                   width: "100%",
-                  height: "320px",
+                  aspectRatio: "4 / 3",
                   borderRadius: "16px",
                   overflow: "hidden",
                   border: "1px solid var(--gold-border)",
@@ -124,7 +118,7 @@ export default function GalleryPreview() {
                   src={item.imageUrl}
                   alt={item.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   style={{
                     objectFit: "cover",
                     objectPosition: "center",
@@ -253,7 +247,46 @@ export default function GalleryPreview() {
         </div>
       </div>
 
-      {/* Lightbox Modal */}
+      <style jsx>{`
+        .gallery-preview-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2.2rem 1.8rem;
+        }
+
+        @media (min-width: 640px) {
+          .gallery-preview-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .gallery-preview-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        .gallery-preview-card:hover {
+          border-color: var(--gold-border-bright);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+        }
+
+        .gallery-preview-card:hover .preview-img {
+          transform: scale(1.06);
+        }
+
+        .gallery-preview-card:hover .hover-overlay {
+          opacity: 1;
+        }
+
+        .gallery-view-more-btn:hover {
+          background: var(--gold-gradient);
+          color: var(--teal-950);
+          border-color: transparent;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(197, 168, 112, 0.25);
+        }
+      `}</style>  {/* Lightbox Modal */}
       <Lightbox
         isOpen={activeLightboxIndex !== null}
         items={previewItems}
@@ -262,22 +295,6 @@ export default function GalleryPreview() {
         onNext={handleNext}
         onPrev={handlePrev}
       />
-
-      <style jsx>{`
-        .gallery-preview-card:hover {
-          border-color: var(--gold-border-bright);
-          transform: translateY(-3px);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-        }
-
-        .gallery-preview-card:hover .preview-img {
-          transform: scale(1.04);
-        }
-
-        .gallery-preview-card:hover .hover-overlay {
-          opacity: 1;
-        }
-      `}</style>
     </section>
   );
 }
