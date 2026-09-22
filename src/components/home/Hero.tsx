@@ -88,17 +88,6 @@ export default function Hero() {
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="w-full shadow-2xl rounded-2xl"
               />
-
-              {/* Floating verified badge */}
-              <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-surface-elevated/95 backdrop-blur-md border border-gold-400/40 px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gold-400/20 border border-gold-400/40 flex items-center justify-center text-gold-400 font-serif font-bold text-lg">
-                  5★
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-ivory">JustDial Verified</p>
-                  <p className="text-[11px] text-gold-300">11 Genuine Reviews</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
