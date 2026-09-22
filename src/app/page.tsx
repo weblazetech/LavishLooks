@@ -37,7 +37,7 @@ export default function HomePage() {
       {/* 8. Social Proof (5.0 rating, 11 JustDial reviews) */}
       <SocialProof />
 
-      {/* 9. Location / Visit Us (Monday hours & [CONFIRM]) */}
+      {/* 9. Location / Visit Us (Open all days except Tuesday) */}
       <LocationSection />
 
       {/* 10. Final Booking CTA */}

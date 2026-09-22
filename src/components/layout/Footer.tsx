@@ -249,8 +249,8 @@ export default function Footer() {
               <div style={{ display: "flex", alignItems: "flex-start", gap: "0.6rem" }}>
                 <Clock size={18} style={{ color: "var(--gold-400)", flexShrink: 0, marginTop: "2px" }} />
                 <div style={{ fontSize: "0.88rem", color: "var(--text-muted-dark)", lineHeight: 1.5 }}>
-                  <p style={{ color: "var(--ivory-50)" }}>Monday: <span style={{ color: "var(--gold-300)" }}>{SALON_INFO.hours.monday}</span></p>
-                  <p>Remaining Days: <span style={{ color: "var(--gold-400)", fontWeight: 600 }}>{SALON_INFO.hours.remainingDays}</span> (confirm via call/message)</p>
+                  <p style={{ color: "var(--ivory-50)" }}>Wed – Mon: <span style={{ color: "var(--gold-300)", fontWeight: 500 }}>8:00 AM – 9:00 PM</span></p>
+                  <p>Tuesday: <span style={{ color: "#f87171", fontWeight: 600 }}>Closed</span> (Open all other days)</p>
                 </div>
               </div>
 

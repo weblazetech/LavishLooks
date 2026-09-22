@@ -117,36 +117,36 @@ export default function LocationSection() {
                   >
                     Salon Hours
                   </h3>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
                     <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
                       <span style={{ fontSize: "0.92rem", color: "var(--ivory-50)", fontWeight: 500 }}>
-                        Monday:
+                        Wednesday – Monday:
                       </span>
                       <span style={{ fontSize: "0.92rem", color: "var(--gold-300)", fontWeight: 600 }}>
-                        {SALON_INFO.hours.monday}
+                        8:00 AM – 9:00 PM
                       </span>
                     </div>
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                       <span style={{ fontSize: "0.92rem", color: "var(--ivory-50)", fontWeight: 500 }}>
-                        Remaining Days:
+                        Tuesday:
                       </span>
                       <span
                         style={{
-                          fontSize: "0.85rem",
-                          color: "var(--gold-400)",
+                          fontSize: "0.82rem",
+                          color: "#f87171",
                           fontWeight: 600,
-                          border: "1px solid var(--gold-border)",
-                          padding: "0.1rem 0.5rem",
+                          border: "1px solid rgba(239, 68, 68, 0.35)",
+                          padding: "0.15rem 0.6rem",
                           borderRadius: "var(--radius-sm)",
-                          background: "rgba(13, 49, 49, 0.6)",
+                          background: "rgba(239, 68, 68, 0.12)",
                         }}
                       >
-                        {SALON_INFO.hours.remainingDays}
+                        Closed (Weekly Off)
                       </span>
                     </div>
                   </div>
-                  <p style={{ fontSize: "0.8rem", color: "var(--text-muted-dark)", marginTop: "0.5rem" }}>
-                    *Please call or message ahead to confirm slot availability for remaining days.
+                  <p style={{ fontSize: "0.8rem", color: "var(--text-muted-dark)", marginTop: "0.55rem" }}>
+                    Open 6 days a week. Appointments recommended; walk-ins warmly welcome.
                   </p>
                 </div>
               </div>
