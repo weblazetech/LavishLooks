@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Calendar, Sparkles } from "lucide-react";
+import { Menu, X, Calendar, Sparkles, Phone } from "lucide-react";
 import { SALON_INFO } from "@/data/salonInfo";
 
 export default function Navbar() {
@@ -148,6 +148,26 @@ export default function Navbar() {
             }}
             className="desktop-cta"
           >
+            <a
+              href={`tel:${SALON_INFO.social.phone.replace(/\s+/g, "")}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                color: "var(--ivory-50)",
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.82rem",
+                fontWeight: 600,
+                letterSpacing: "0.03em",
+                transition: "color 0.2s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold-300)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ivory-50)")}
+            >
+              <Phone size={14} style={{ color: "var(--gold-400)" }} />
+              <span>{SALON_INFO.social.phoneFormatted}</span>
+            </a>
+
             <Link
               href="/contact"
               style={{
@@ -296,6 +316,28 @@ export default function Navbar() {
             <Calendar size={18} />
             <span>Book An Appointment</span>
           </Link>
+
+          <a
+            href={`tel:${SALON_INFO.social.phone.replace(/\s+/g, "")}`}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.6rem",
+              padding: "0.85rem",
+              borderRadius: "var(--radius-full)",
+              border: "1px solid var(--gold-border)",
+              background: "rgba(13, 49, 49, 0.6)",
+              color: "var(--ivory-50)",
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.92rem",
+              fontWeight: 600,
+              letterSpacing: "0.05em",
+            }}
+          >
+            <Phone size={16} style={{ color: "var(--gold-400)" }} />
+            <span>Call: {SALON_INFO.social.phoneFormatted}</span>
+          </a>
 
           <div
             style={{
