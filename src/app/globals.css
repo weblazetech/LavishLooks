@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+
+  /* LIGHT MODE LUXURY TOKENS (Warm Ivory & Porcelain Editorial) */
+  --bg-primary: #FAF7F2;
+  --bg-surface: #F3ECE1;
+  --surface-card: #FFFFFF;
+  --surface-elevated: #F8F4ED;
+  --surface-border: rgba(0, 0, 0, 0.08);
+  --text-primary: #1A1815;
+  --text-secondary: #524B42;
+  --text-muted: #7D7467;
+  --text-subtle: #A3998C;
+  --gold-primary: #B88E18;
+  --gold-secondary: #997510;
+  --gold-light: #F5EED5;
+  --gold-dark: #785A09;
+  --teal-accent: #0D9488;
+  --teal-glow: #0F766E;
+  --card-shadow: 0 10px 30px -8px rgba(120, 90, 40, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+}
+
+.dark {
+  /* DARK MODE LUXURY TOKENS (Signature Onyx & Champagne Gold) */
+  --bg-primary: #0B0C10;
+  --bg-surface: #12141C;
+  --surface-card: #151822;
+  --surface-elevated: #181B26;
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #FAF8F5;
+  --text-secondary: #D5CFBF;
+  --text-muted: #9E988A;
+  --text-subtle: #68645C;
+  --gold-primary: #D4AF37;
+  --gold-secondary: #DFC67E;
+  --gold-light: #F5EED5;
+  --gold-dark: #836314;
+  --teal-accent: #00A896;
+  --teal-glow: #2DD4BF;
+  --card-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(212, 175, 55, 0.12);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  ::selection {
+    background-color: var(--gold-primary);
+    color: var(--bg-primary);
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-border);
+    border-radius: 4px;
+    border: 1px solid var(--surface-card);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-primary);
+  }
+}
+
+@layer components {
+  .luxe-border {
+    border: 1px solid rgba(184, 142, 24, 0.25);
+  }
+  .dark .luxe-border {
+    border: 1px solid rgba(212, 175, 55, 0.22);
+  }
+
+  .luxe-border-subtle {
+    border: 1px solid var(--surface-border);
+  }
+
+  .luxe-card {
+    background-color: var(--surface-card);
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .luxe-card:hover {
+    border-color: var(--gold-primary);
+    transform: translateY(-2px);
+  }
+
+  .luxe-glow {
+    box-shadow: 0 0 25px -5px rgba(212, 175, 55, 0.2);
+  }
+
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #FFF6DD 0%, #D4AF37 50%, #B88E18 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .light .gold-gradient-text,
+  :root:not(.dark) .gold-gradient-text {
+    background: linear-gradient(135deg, #785A09 0%, #B88E18 60%, #594204 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gold-sheen-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  .gold-sheen-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.18) 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: sheen 7s infinite ease-in-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .gold-sheen-bg::after {
+    display: none !important;
+  }
+}
+
