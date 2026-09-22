@@ -12,7 +12,7 @@ export default function SignatureServices() {
       subtitle: "Occasion Couture",
       description:
         "High-definition and airbrush techniques that capture natural luminosity and withstand the emotional grandeur of celebration. Tailored for muhurtham rites, sangeet, and reception spectacles.",
-      image: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=1200&auto=format&fit=crop",
+      image: "/images/services/signature-bridal-makeup.jpg",
       link: "/bridal",
       aspect: "landscape",
     },
@@ -22,7 +22,7 @@ export default function SignatureServices() {
       subtitle: "Texture & Dimension",
       description:
         "From seamless dimensional balayage to restorative botoplex and keratin smoothing therapies. Precision geometry meets customized hair health for dramatic, weightless movement.",
-      image: "https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=1200&auto=format&fit=crop",
+      image: "/images/services/signature-hair.jpg",
       link: "/services#hair",
       aspect: "portrait",
     },
@@ -42,7 +42,7 @@ export default function SignatureServices() {
       subtitle: "Precision & Poise",
       description:
         "Scissor architecture, sharp razor line-ups, and hot-towel skin detox rituals. Designed for the modern gentleman who demands impeccable sharpness for weddings and everyday distinction.",
-      image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1200&auto=format&fit=crop",
+      image: "/images/services/signature-mens.jpg",
       link: "/services#mens-grooming",
       aspect: "portrait",
     },

@@ -103,7 +103,7 @@ export default function BridalPage() {
     {
       title: "Temple Jewellery & Muhurtham Glow",
       category: "Makeup & Hair",
-      image: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=800&auto=format&fit=crop",
+      image: "/images/services/signature-bridal-makeup.jpg",
     },
     {
       title: "Peacock Royal Bridal Henna",
@@ -113,12 +113,12 @@ export default function BridalPage() {
     {
       title: "Reception Diamond Shimmer",
       category: "Occasion Glamour",
-      image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
+      image: "/images/bridal-reception.jpg",
     },
     {
       title: "Handcrafted Jaali Palms",
       category: "Mehndi",
-      image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop",
+      image: "/images/bridal-palms.jpg",
     },
   ];
 

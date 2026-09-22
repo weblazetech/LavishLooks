@@ -33,7 +33,7 @@ export const metadata: Metadata = {
       "Beauty, Crafted With Intention. Luxury unisex salon in Warangal offering bespoke hair, skin, bridal artistry, and men's grooming.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop",
+        url: "https://lavishlooks.in/images/hero-salon.jpg",
         width: 1200,
         height: 630,
         alt: "Karthikeya Lavish Looks Luxury Salon Warangal",
@@ -68,7 +68,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "BeautySalon",
     name: SALON_INFO.name,
-    image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop",
+    image: "https://lavishlooks.in/images/hero-salon.jpg",
     address: {
       "@type": "PostalAddress",
       streetAddress: `${SALON_INFO.address.line1}, ${SALON_INFO.address.line2}, ${SALON_INFO.address.area}`,
