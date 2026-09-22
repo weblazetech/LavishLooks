@@ -11,6 +11,8 @@ interface ButtonProps {
   icon?: React.ReactNode;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  fullWidth?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default function Button({
@@ -23,6 +25,8 @@ export default function Button({
   icon,
   type = "button",
   disabled = false,
+  fullWidth = false,
+  style = {},
 }: ButtonProps) {
   const getPadding = () => {
     switch (size) {
@@ -31,7 +35,7 @@ export default function Button({
       case "lg":
         return "1rem 2.2rem";
       default:
-        return "0.78rem 1.65rem";
+        return "0.78rem 1.5rem";
     }
   };
 
@@ -47,7 +51,10 @@ export default function Button({
   };
 
   const baseStyle: React.CSSProperties = {
-    display: "inline-flex",
+    display: fullWidth ? "flex" : "inline-flex",
+    width: fullWidth ? "100%" : "auto",
+    maxWidth: "100%",
+    boxSizing: "border-box",
     alignItems: "center",
     justifyContent: "center",
     gap: "0.6rem",
@@ -55,14 +62,15 @@ export default function Button({
     fontSize: getFontSize(),
     fontFamily: "var(--font-sans)",
     fontWeight: 600,
-    letterSpacing: "0.1em",
+    letterSpacing: "0.08em",
     textTransform: "uppercase",
     borderRadius: "var(--radius-full)",
     cursor: disabled ? "not-allowed" : "pointer",
     transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
     textDecoration: "none",
     opacity: disabled ? 0.6 : 1,
-    whiteSpace: "nowrap",
+    whiteSpace: fullWidth ? "normal" : "nowrap",
+    textAlign: "center",
   };
 
   let variantStyle: React.CSSProperties = {};
@@ -95,7 +103,7 @@ export default function Button({
     };
   }
 
-  const combinedStyle = { ...baseStyle, ...variantStyle };
+  const combinedStyle = { ...baseStyle, ...variantStyle, ...style };
 
   if (href) {
     return (

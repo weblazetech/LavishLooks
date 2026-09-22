@@ -7,7 +7,11 @@ import { SALON_INFO } from "@/data/salonInfo";
 
 export default function LocationSection() {
   return (
-    <section className="section-spacing" style={{ backgroundColor: "var(--teal-950)" }} id="location">
+    <section
+      className="section-spacing"
+      style={{ backgroundColor: "var(--teal-950)", scrollMarginTop: "5rem" }}
+      id="location"
+    >
       <div className="container">
         <SectionHeader
           tag="Find The Atelier"
@@ -17,25 +21,9 @@ export default function LocationSection() {
           align="center"
         />
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "3rem",
-            alignItems: "stretch",
-          }}
-        >
+        <div className="location-grid">
           {/* Left Column: Address, Exact Hours, and Direct Connections */}
-          <div
-            className="editorial-glass-card"
-            style={{
-              padding: "3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              backgroundColor: "rgba(7, 30, 30, 0.6)",
-            }}
-          >
+          <div className="editorial-glass-card location-card">
             <div>
               {/* Brand Header */}
               <div className="brand-wordmark" style={{ marginBottom: "1.8rem" }}>
@@ -92,7 +80,7 @@ export default function LocationSection() {
                 </div>
               </div>
 
-              {/* Exact Hours Block with Strict Rules */}
+              {/* Exact Hours Block with Clean Mobile Layout */}
               <div style={{ display: "flex", gap: "1rem", marginBottom: "2.2rem" }}>
                 <div
                   style={{
@@ -110,67 +98,83 @@ export default function LocationSection() {
                 >
                   <Clock size={20} />
                 </div>
-                <div>
+                <div style={{ flexGrow: 1, minWidth: 0 }}>
                   <h3
                     className="font-serif"
-                    style={{ fontSize: "1.25rem", color: "var(--ivory-50)", marginBottom: "0.4rem" }}
+                    style={{ fontSize: "1.25rem", color: "var(--ivory-50)", marginBottom: "0.6rem" }}
                   >
                     Salon Hours
                   </h3>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
-                      <span style={{ fontSize: "0.92rem", color: "var(--ivory-50)", fontWeight: 500 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                        gap: "0.25rem 0.5rem",
+                        paddingBottom: "0.5rem",
+                        borderBottom: "1px solid rgba(197, 168, 112, 0.12)",
+                      }}
+                    >
+                      <span style={{ fontSize: "0.9rem", color: "var(--ivory-50)", fontWeight: 500 }}>
                         Wednesday – Monday:
                       </span>
-                      <span style={{ fontSize: "0.92rem", color: "var(--gold-300)", fontWeight: 600 }}>
+                      <span
+                        style={{
+                          fontSize: "0.9rem",
+                          color: "var(--gold-300)",
+                          fontWeight: 600,
+                          fontFamily: "var(--font-sans)",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
                         8:00 AM – 9:00 PM
                       </span>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                      <span style={{ fontSize: "0.92rem", color: "var(--ivory-50)", fontWeight: 500 }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                        gap: "0.25rem 0.5rem",
+                        paddingTop: "0.1rem",
+                      }}
+                    >
+                      <span style={{ fontSize: "0.9rem", color: "var(--ivory-50)", fontWeight: 500 }}>
                         Tuesday:
                       </span>
                       <span
                         style={{
-                          fontSize: "0.82rem",
+                          fontSize: "0.78rem",
                           color: "#f87171",
                           fontWeight: 600,
                           border: "1px solid rgba(239, 68, 68, 0.35)",
-                          padding: "0.15rem 0.6rem",
+                          padding: "0.18rem 0.6rem",
                           borderRadius: "var(--radius-sm)",
                           background: "rgba(239, 68, 68, 0.12)",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         Closed (Weekly Off)
                       </span>
                     </div>
                   </div>
-                  <p style={{ fontSize: "0.8rem", color: "var(--text-muted-dark)", marginTop: "0.55rem" }}>
+                  <p style={{ fontSize: "0.8rem", color: "var(--text-muted-dark)", marginTop: "0.65rem", lineHeight: 1.5 }}>
                     Open 6 days a week. Appointments recommended; walk-ins warmly welcome.
                   </p>
                 </div>
               </div>
 
               {/* Direct Links */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.8rem", marginBottom: "2rem" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginBottom: "2rem" }}>
                 <a
                   href={`tel:${SALON_INFO.social.phone.replace(/\s+/g, "")}`}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    padding: "0.6rem 1.15rem",
-                    borderRadius: "var(--radius-full)",
-                    border: "1px solid var(--gold-border)",
-                    background: "rgba(13, 49, 49, 0.6)",
-                    color: "var(--ivory-50)",
-                    fontSize: "0.82rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.05em",
-                    transition: "all 0.2s ease",
-                  }}
+                  className="location-pill"
+                  style={{ color: "var(--ivory-50)" }}
                 >
-                  <Phone size={15} style={{ color: "var(--gold-400)" }} />
+                  <Phone size={15} style={{ color: "var(--gold-400)", flexShrink: 0 }} />
                   <span>{SALON_INFO.social.phoneFormatted}</span>
                 </a>
 
@@ -178,22 +182,10 @@ export default function LocationSection() {
                   href={SALON_INFO.social.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    padding: "0.6rem 1.15rem",
-                    borderRadius: "var(--radius-full)",
-                    border: "1px solid var(--gold-border)",
-                    background: "rgba(13, 49, 49, 0.6)",
-                    color: "var(--ivory-50)",
-                    fontSize: "0.82rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.05em",
-                    transition: "all 0.2s ease",
-                  }}
+                  className="location-pill"
+                  style={{ color: "var(--ivory-50)" }}
                 >
-                  <MessageSquare size={15} style={{ color: "var(--gold-400)" }} />
+                  <MessageSquare size={15} style={{ color: "var(--gold-400)", flexShrink: 0 }} />
                   <span>WhatsApp Concierge</span>
                 </a>
 
@@ -201,20 +193,8 @@ export default function LocationSection() {
                   href={SALON_INFO.social.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    padding: "0.6rem 1.15rem",
-                    borderRadius: "var(--radius-full)",
-                    border: "1px solid var(--gold-border)",
-                    background: "rgba(13, 49, 49, 0.6)",
-                    color: "var(--gold-300)",
-                    fontSize: "0.82rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.05em",
-                    transition: "all 0.2s ease",
-                  }}
+                  className="location-pill"
+                  style={{ color: "var(--gold-300)" }}
                 >
                   <InstagramIcon size={15} />
                   <span>{SALON_INFO.social.instagramHandle}</span>
@@ -224,7 +204,19 @@ export default function LocationSection() {
 
             {/* CTA Button */}
             <div style={{ paddingTop: "1.5rem", borderTop: "1px solid rgba(197, 168, 112, 0.15)" }}>
-              <Button href="/contact" variant="primary" size="md" icon={<Calendar size={16} />}>
+              <Button
+                href="/contact"
+                variant="primary"
+                size="md"
+                fullWidth
+                icon={<Calendar size={16} />}
+                style={{
+                  whiteSpace: "nowrap",
+                  fontSize: "clamp(0.76rem, 3.2vw, 0.85rem)",
+                  letterSpacing: "0.05em",
+                  padding: "0.85rem 1.2rem",
+                }}
+              >
                 Request An Appointment
               </Button>
             </div>
@@ -259,7 +251,7 @@ export default function LocationSection() {
             {/* Bottom Bar on Map */}
             <div
               style={{
-                padding: "1.25rem 1.8rem",
+                padding: "1.1rem 1.25rem",
                 backgroundColor: "var(--teal-900)",
                 borderTop: "1px solid var(--gold-border)",
                 display: "flex",
