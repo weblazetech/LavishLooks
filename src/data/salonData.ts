@@ -66,12 +66,12 @@ export const SALON_DATA: SalonInfo = {
     full: "Road No. 14A (opposite O City Main Road), Kashibugga Society Colony, Kashibugga, Azam Jahi Mills Colony, Warangal, Telangana 506002",
     plusCode: "XJJ7+7Q Warangal",
     mapsEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.778736412192!2d79.6105!3d17.9942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDU5JzM5LjEiTiA3OcKwMzYnMzcuOCJF!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin",
+      "https://maps.google.com/maps?q=Road+No.+14A,+opposite+O+City+Main+Road,+Kashibugga+Society+Colony,+Warangal,+Telangana+506002&t=&z=15&ie=UTF8&iwloc=&output=embed",
   },
   hours: {
-    verifiedDay: "Monday",
+    verifiedDay: "Monday – Sunday (All Days)",
     verifiedTime: "8:00 AM – 9:00 PM",
-    note: "Verified timing for Monday. Please contact or book ahead for customized appointments.",
+    note: "Open all 7 days from 8:00 AM – 9:00 PM. Direct walk-ins and appointments welcome.",
   },
   instagram: {
     handle: "@k_lavishlooks",

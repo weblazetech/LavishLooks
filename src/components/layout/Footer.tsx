@@ -35,6 +35,15 @@ export default function Footer() {
               </a>
 
               <a
+                href={SALON_DATA.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/40 text-[#25D366] hover:text-[#20bd5a] transition-all duration-200"
+              >
+                <span>💬 WhatsApp</span>
+              </a>
+
+              <a
                 href={SALON_DATA.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"

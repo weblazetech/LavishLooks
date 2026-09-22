@@ -124,15 +124,6 @@ export default function SalonImage({
           </div>
         </div>
       )}
-
-
-      {/* Subtle overlay gradient on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex flex-col justify-end p-5">
-        <span className="text-gold-300 text-xs tracking-widest uppercase font-sans font-semibold">
-          {category}
-        </span>
-        <h4 className="text-ivory font-serif text-lg font-medium">{alt}</h4>
-      </div>
     </div>
   );
 }

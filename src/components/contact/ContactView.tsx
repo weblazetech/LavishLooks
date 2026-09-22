@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MapPin, Clock, Instagram, Sparkles, Navigation, ArrowUpRight } from "lucide-react";
+import { MapPin, Clock, Instagram, Sparkles, Navigation, ArrowUpRight, MessageCircle } from "lucide-react";
 import AppointmentForm from "@/components/booking/AppointmentForm";
 import { SALON_DATA } from "@/data/salonData";
 
@@ -52,7 +52,7 @@ export default function ContactView() {
                   </div>
                 </div>
 
-                <div className="space-y-1.5 text-sm text-ivory/80 pt-2 border-t border-surface-border/60">
+                <div className="space-y-1.5 text-sm text-ivory/80 pt-2 border-t border-black/[0.06] dark:border-white/[0.05]">
                   <p className="text-xs uppercase tracking-widest text-ivory/60 font-semibold">
                     Physical Address
                   </p>
@@ -65,27 +65,38 @@ export default function ContactView() {
                   </div>
                 </div>
 
-                {/* Direct Phone Contact */}
-                <div className="space-y-1.5 text-sm text-ivory/80 pt-2 border-t border-surface-border/60">
+                {/* Direct Phone & WhatsApp */}
+                <div className="space-y-1.5 text-sm text-ivory/80 pt-2 border-t border-black/[0.06] dark:border-white/[0.05]">
                   <p className="text-xs uppercase tracking-widest text-ivory/60 font-semibold">
                     Direct Phone / WhatsApp
                   </p>
-                  <div className="p-3 rounded-xl bg-surface-elevated border border-surface-border flex items-center justify-between">
+                  <div className="p-3.5 rounded-xl bg-surface-elevated border border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <p className="text-sm font-semibold text-gold-400">{SALON_DATA.phoneDisplay}</p>
-                      <p className="text-[11px] text-ivory/60">Call or message for inquiries</p>
+                      <p className="text-[11px] text-ivory/60">Call or WhatsApp for immediate booking</p>
                     </div>
-                    <a
-                      href={`tel:${SALON_DATA.phoneTel}`}
-                      className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-gold-400 text-background hover:bg-gold-300 transition-colors"
-                    >
-                      Call
-                    </a>
+                    <div className="flex items-center gap-2">
+                      <a
+                        href={`tel:${SALON_DATA.phoneTel}`}
+                        className="px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-gold-400 text-background hover:bg-gold-300 transition-colors"
+                      >
+                        Call
+                      </a>
+                      <a
+                        href={SALON_DATA.whatsappLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#25D366] text-white hover:bg-[#20bd5a] transition-colors flex items-center gap-1.5 shadow-sm"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        <span>WhatsApp</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
 
                 {/* Verified Operating Hours */}
-                <div className="space-y-1.5 text-sm text-ivory/80 pt-2 border-t border-surface-border/60">
+                <div className="space-y-1.5 text-sm text-ivory/80 pt-2 border-t border-black/[0.06] dark:border-white/[0.05]">
                   <div className="flex items-center gap-2">
                     <Clock className="w-3.5 h-3.5 text-gold-400" />
                     <p className="text-xs uppercase tracking-widest text-ivory/60 font-semibold">
@@ -104,10 +115,10 @@ export default function ContactView() {
               </div>
 
               {/* Integrated Embedded Map Frame */}
-              <div className="rounded-2xl overflow-hidden border border-surface-border bg-surface-elevated flex-grow min-h-[160px] relative shadow-inner">
+              <div className="rounded-2xl overflow-hidden border border-surface-border bg-surface-elevated flex-grow min-h-[180px] relative shadow-inner">
                 <iframe
                   title="Karthikeya Lavish Looks Map Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.778736412192!2d79.6105!3d17.9942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDU5JzM5LjEiTiA3OcKwMzYnMzcuOCJF!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin"
+                  src={SALON_DATA.address.mapsEmbedUrl}
                   width="100%"
                   height="100%"
                   className="w-full h-full absolute inset-0 border-0 dark:[filter:invert(90%)_hue-rotate(180deg)_brightness(95%)_contrast(90%)]"
