@@ -17,9 +17,13 @@ export interface SalonInfo {
     plusCode: string;
   };
   hours: {
+    schedule: string;
+    operatingDays: string;
+    tuesday: string;
+    timings: string;
+    note: string;
     monday: string;
     remainingDays: string;
-    note: string;
   };
   socialProof: {
     rating: string;
@@ -58,9 +62,13 @@ export const SALON_INFO: SalonInfo = {
     plusCode: "XJJ7+7Q Warangal",
   },
   hours: {
+    schedule: "Wed – Mon: 8:00 AM – 9:00 PM",
+    operatingDays: "Wednesday – Monday (All Days Except Tuesday)",
+    tuesday: "Closed",
+    timings: "8:00 AM – 9:00 PM",
+    note: "Open all days except Tuesday from 8:00 AM to 9:00 PM. Appointments recommended; walk-ins warmly welcome.",
     monday: "8:00 AM – 9:00 PM",
-    remainingDays: "[CONFIRM]",
-    note: "Appointments are recommended. Monday verified 8:00 AM – 9:00 PM; please confirm remaining days with our concierge.",
+    remainingDays: "8:00 AM – 9:00 PM (Tue Closed)",
   },
   socialProof: {
     rating: "5.0 ★",

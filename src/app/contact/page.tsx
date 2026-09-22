@@ -349,30 +349,31 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  {/* Hours Rule Compliant */}
+                  {/* Hours */}
                   <div style={{ display: "flex", gap: "0.8rem" }}>
                     <Clock size={20} style={{ color: "var(--gold-400)", flexShrink: 0, marginTop: "2px" }} />
                     <div style={{ fontSize: "0.92rem", color: "var(--ivory-100)", lineHeight: 1.6 }}>
                       <p>
-                        Monday: <span style={{ color: "var(--gold-300)", fontWeight: 600 }}>{SALON_INFO.hours.monday}</span>
+                        Wednesday – Monday:{" "}
+                        <span style={{ color: "var(--gold-300)", fontWeight: 600 }}>8:00 AM – 9:00 PM</span>
                       </p>
                       <p>
-                        Remaining Days:{" "}
+                        Tuesday:{" "}
                         <span
                           style={{
-                            color: "var(--gold-400)",
+                            color: "#f87171",
                             fontWeight: 600,
-                            padding: "0.1rem 0.4rem",
+                            padding: "0.1rem 0.5rem",
                             borderRadius: "4px",
-                            border: "1px solid var(--gold-border)",
-                            background: "rgba(13, 49, 49, 0.6)",
+                            border: "1px solid rgba(239, 68, 68, 0.35)",
+                            background: "rgba(239, 68, 68, 0.12)",
                           }}
                         >
-                          {SALON_INFO.hours.remainingDays}
+                          Closed (Weekly Off)
                         </span>
                       </p>
                       <p style={{ fontSize: "0.78rem", color: "var(--text-muted-dark)", marginTop: "3px" }}>
-                        Please call ahead or send a WhatsApp message to confirm timings for remaining days.
+                        Open all days except Tuesday. Appointments recommended; walk-ins warmly welcome.
                       </p>
                     </div>
                   </div>

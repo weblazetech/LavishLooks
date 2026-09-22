@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#051c1f"/>
+      <stop offset="50%" stop-color="#082b2f"/>
+      <stop offset="100%" stop-color="#020d0f"/>
+    </linearGradient>
+
+    <!-- Gold Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCEFD2"/>
+      <stop offset="30%" stop-color="#E2C285"/>
+      <stop offset="70%" stop-color="#C5A059"/>
+      <stop offset="100%" stop-color="#8F6B2C"/>
+    </linearGradient>
+
+    <!-- Border Gold Gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2DFB8"/>
+      <stop offset="50%" stop-color="#A8833E"/>
+      <stop offset="100%" stop-color="#FCEFD2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect x="12" y="12" width="488" height="488" rx="110" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="10"/>
+  <!-- Inner Hairline Border -->
+  <rect x="28" y="28" width="456" height="456" rx="94" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-opacity="0.35"/>
+
+  <!-- Top 4-point Diamond Sparkle -->
+  <path d="M 256 50 Q 256 80 286 80 Q 256 80 256 110 Q 256 80 226 80 Q 256 80 256 50 Z" fill="url(#goldGrad)"/>
+  <path d="M 390 100 Q 390 118 408 118 Q 390 118 390 136 Q 390 118 372 118 Q 390 118 390 100 Z" fill="url(#goldGrad)" opacity="0.75"/>
+
+  <!-- Monogram KL -->
+  <text x="50%" y="62%" text-anchor="middle" font-family="Georgia, 'Cormorant Garamond', 'Times New Roman', serif" font-size="220" font-weight="bold" fill="url(#goldGrad)" letter-spacing="4">
+    KL
+  </text>
+
+  <!-- Subtitle Tag -->
+  <text x="50%" y="84%" text-anchor="middle" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="30" font-weight="600" fill="#E2C285" letter-spacing="9" opacity="0.9">
+    LAVISH LOOKS
+  </text>
+</svg>
