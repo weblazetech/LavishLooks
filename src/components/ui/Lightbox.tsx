@@ -1,538 +1,180 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useCallback } from "react";
+import { X, ChevronLeft, ChevronRight, Instagram, Sparkles } from "lucide-react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
-import { GalleryItem } from "@/data/gallery";
+import { GalleryItem } from "@/data/galleryData";
 
 interface LightboxProps {
-  isOpen: boolean;
   items: GalleryItem[];
-  currentIndex: number;
+  currentIndex: number | null;
   onClose: () => void;
-  onNext: () => void;
-  onPrev: () => void;
+  onSelectIndex: (index: number) => void;
 }
 
 export default function Lightbox({
-  isOpen,
   items,
   currentIndex,
   onClose,
-  onNext,
-  onPrev,
+  onSelectIndex,
 }: LightboxProps) {
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
-  const triggerElementRef = useRef<HTMLElement | null>(null);
+  const isOpen = currentIndex !== null && currentIndex >= 0 && currentIndex < items.length;
+  const currentItem = isOpen ? items[currentIndex] : null;
 
-  // Touch swipe support for mobile
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-  const [touchEndX, setTouchEndX] = useState<number | null>(null);
+  const handlePrev = useCallback(() => {
+    if (currentIndex === null) return;
+    const nextIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+    onSelectIndex(nextIndex);
+  }, [currentIndex, items.length, onSelectIndex]);
 
-  // Focus transfer on open, inert background, and focus restoration on close
-  useEffect(() => {
-    if (isOpen) {
-      // Store trigger element if not already captured
-      if (!triggerElementRef.current && typeof document !== "undefined") {
-        triggerElementRef.current = document.activeElement as HTMLElement | null;
-      }
+  const handleNext = useCallback(() => {
+    if (currentIndex === null) return;
+    const nextIndex = currentIndex === items.length - 1 ? 0 : currentIndex + 1;
+    onSelectIndex(nextIndex);
+  }, [currentIndex, items.length, onSelectIndex]);
 
-      // Mark background elements inert and aria-hidden
-      const backgroundElements = document.querySelectorAll("header, main, footer");
-      backgroundElements.forEach((el) => {
-        el.setAttribute("inert", "");
-        el.setAttribute("aria-hidden", "true");
-      });
-
-      // Move focus into the dialog (Close button)
-      const focusTimer = setTimeout(() => {
-        closeBtnRef.current?.focus();
-      }, 50);
-
-      // Lock body scroll
-      const originalOverflow = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-
-      return () => {
-        clearTimeout(focusTimer);
-        document.body.style.overflow = originalOverflow;
-      };
-    } else if (!isOpen && triggerElementRef.current) {
-      // Un-inert background elements
-      const backgroundElements = document.querySelectorAll("header, main, footer");
-      backgroundElements.forEach((el) => {
-        el.removeAttribute("inert");
-        el.removeAttribute("aria-hidden");
-      });
-
-      // Restore focus to opening gallery item
-      const restoreEl = triggerElementRef.current;
-      triggerElementRef.current = null;
-      setTimeout(() => {
-        restoreEl?.focus();
-      }, 50);
-    }
-  }, [isOpen]);
-
-  // Cleanup inert and scroll on unmount
-  useEffect(() => {
-    return () => {
-      const backgroundElements = document.querySelectorAll("header, main, footer");
-      backgroundElements.forEach((el) => {
-        el.removeAttribute("inert");
-        el.removeAttribute("aria-hidden");
-      });
-      document.body.style.overflow = "";
-    };
-  }, []);
-
-  // Keyboard navigation & Focus Trapping
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        onClose();
-        return;
-      }
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        onNext();
-        return;
-      }
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        onPrev();
-        return;
-      }
-
-      // Focus trap within dialog
-      if (e.key === "Tab" && dialogRef.current) {
-        const focusableElements = dialogRef.current.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        );
-
-        if (focusableElements.length === 0) {
-          e.preventDefault();
-          return;
-        }
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-          // Backward tab: from first wrap to last
-          if (document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          // Forward tab: from last wrap to first
-          if (document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
-        }
-      }
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
     };
 
+    // Lock body scroll
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose, onNext, onPrev]);
 
-  // Touch swipe handlers
-  const minSwipeDistance = 50;
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, handleNext, handlePrev, onClose]);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchEndX(null);
-    setTouchStartX(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEndX(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStartX || !touchEndX) return;
-    const distance = touchStartX - touchEndX;
-    if (distance > minSwipeDistance) {
-      // Swiped Left -> Next
-      onNext();
-    } else if (distance < -minSwipeDistance) {
-      // Swiped Right -> Prev
-      onPrev();
-    }
-  };
-
-  if (!isOpen || !items[currentIndex]) return null;
-
-  const currentItem = items[currentIndex];
+  if (!isOpen || !currentItem) return null;
 
   return (
     <div
-      ref={dialogRef}
       role="dialog"
       aria-modal="true"
-      aria-label={`Viewing ${currentItem.title}`}
-      className="lightbox-overlay"
+      aria-label="Image Lightbox"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 dark:bg-black/95 backdrop-blur-md p-4 sm:p-6 md:p-8 animate-fadeIn"
       onClick={onClose}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
     >
-      {/* Top Controls Bar */}
-      <div className="lightbox-top-bar" onClick={(e) => e.stopPropagation()}>
-        <div className="lightbox-meta">
-          <span className="editorial-tag">{currentItem.category}</span>
-          <span className="lightbox-counter">
-            {currentIndex + 1} / {items.length}
+      {/* Top Bar Controls */}
+      <div
+        className="absolute top-4 left-4 right-4 sm:top-6 sm:left-6 sm:right-6 flex items-center justify-between z-50 pointer-events-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center gap-2">
+          <span className="px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase bg-gold-400/20 text-gold-400 dark:text-gold-300 border border-gold-400/30">
+            {currentItem.category}
+          </span>
+          <span className="text-xs text-ivory/60">
+            {currentIndex + 1} of {items.length}
           </span>
         </div>
 
         <button
-          ref={closeBtnRef}
-          type="button"
           onClick={onClose}
-          aria-label="Close Lightbox (Esc)"
-          className="lightbox-close-btn"
+          aria-label="Close Lightbox"
+          className="w-11 h-11 rounded-full bg-surface-elevated/90 hover:bg-gold-400/20 border border-surface-border hover:border-gold-400/40 text-ivory flex items-center justify-center transition-all duration-200 shadow-lg"
         >
-          <X size={20} />
+          <X className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Desktop Prev Button */}
-      {items.length > 1 && (
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onPrev();
-          }}
-          aria-label="Previous Image (Left Arrow)"
-          className="lightbox-nav-btn lightbox-prev-btn"
-        >
-          <ChevronLeft size={26} />
-        </button>
-      )}
+      {/* Navigation - Left */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handlePrev();
+        }}
+        aria-label="Previous Image"
+        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-surface-elevated/90 hover:bg-gold-400/20 border border-surface-border hover:border-gold-400/40 text-ivory flex items-center justify-center transition-all duration-200 z-50 shadow-xl"
+      >
+        <ChevronLeft className="w-6 h-6" />
+      </button>
 
       {/* Main Content Area */}
-      <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-        <div className="lightbox-image-wrapper">
-          <Image
-            src={currentItem.imageUrl}
-            alt={currentItem.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 920px"
-            className="lightbox-image"
-            priority
-          />
-        </div>
-
-        {/* Caption & Details */}
-        <div className="lightbox-caption-area">
-          <h3 className="font-serif lightbox-title">{currentItem.title}</h3>
-          <p className="lightbox-caption-text">{currentItem.caption}</p>
-        </div>
-
-        {/* Mobile Action Controls Bar */}
-        {items.length > 1 && (
-          <div className="lightbox-mobile-controls">
-            <button
-              type="button"
-              onClick={onPrev}
-              aria-label="Previous Image"
-              className="lightbox-mobile-nav-btn"
-            >
-              <ChevronLeft size={18} />
-              <span>Previous</span>
-            </button>
-
-            <span className="lightbox-mobile-counter">
-              {currentIndex + 1} of {items.length}
-            </span>
-
-            <button
-              type="button"
-              onClick={onNext}
-              aria-label="Next Image"
-              className="lightbox-mobile-nav-btn"
-            >
-              <span>Next</span>
-              <ChevronRight size={18} />
-            </button>
+      <div
+        className="relative max-w-4xl w-full max-h-[85vh] flex flex-col items-center justify-center pointer-events-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative w-full h-[60vh] sm:h-[68vh] rounded-2xl overflow-hidden bg-surface-card border border-gold-400/20 shadow-2xl flex items-center justify-center">
+          {/* Real Image or Placeholder Card */}
+          <div className="relative w-full h-full">
+            <Image
+              src={currentItem.src}
+              alt={currentItem.title}
+              fill
+              className="object-contain"
+              onError={(e) => {
+                // When fallback is needed, hide img element and reveal placeholder below
+                (e.target as HTMLElement).style.display = "none";
+              }}
+            />
+            {/* Fallback Display if image file is not present yet */}
+            <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-surface-elevated to-surface">
+              <div className="w-16 h-16 rounded-full bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 mb-4">
+                <Sparkles className="w-8 h-8" />
+              </div>
+              <h3 className="font-serif text-2xl text-ivory mb-2 font-medium">
+                {currentItem.title}
+              </h3>
+              <p className="text-sm text-ivory/70 max-w-md mb-4">
+                {currentItem.description || "Authentic work crafted at Karthikeya Lavish Looks."}
+              </p>
+              <div className="p-3 bg-surface-card/80 rounded-xl border border-surface-border text-xs font-mono text-gold-500 dark:text-gold-300 mb-4">
+                Asset location: {currentItem.src}
+              </div>
+              <a
+                href={currentItem.instagramPostUrl || "https://www.instagram.com/k_lavishlooks/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gold-400 hover:text-gold-500 dark:hover:text-gold-300 transition-colors"
+              >
+                <Instagram className="w-4 h-4" />
+                View On Official Instagram @k_lavishlooks →
+              </a>
+            </div>
           </div>
-        )}
+        </div>
+
+        {/* Caption bar */}
+        <div className="w-full mt-4 flex flex-col sm:flex-row items-center justify-between gap-2 px-2 text-center sm:text-left">
+          <div>
+            <h4 className="font-serif text-lg text-ivory font-medium">
+              {currentItem.title}
+            </h4>
+            <p className="text-xs text-ivory/60">{currentItem.tag}</p>
+          </div>
+          <a
+            href={currentItem.instagramPostUrl || "https://www.instagram.com/k_lavishlooks/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-500 dark:hover:text-gold-300 font-medium py-1.5 px-3 rounded-full bg-gold-400/10 border border-gold-400/20 transition-colors"
+          >
+            <Instagram className="w-3.5 h-3.5" />
+            Verified @k_lavishlooks Work
+          </a>
+        </div>
       </div>
 
-      {/* Desktop Next Button */}
-      {items.length > 1 && (
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onNext();
-          }}
-          aria-label="Next Image (Right Arrow)"
-          className="lightbox-nav-btn lightbox-next-btn"
-        >
-          <ChevronRight size={26} />
-        </button>
-      )}
-
-      <style jsx>{`
-        .lightbox-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 1000;
-          background-color: rgba(4, 18, 18, 0.96);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justifyContent: center;
-          padding: 1.5rem;
-          overflow-y: auto;
-          overscroll-behavior: contain;
-          -webkit-overflow-scrolling: touch;
-          animation: fadeIn 0.25s ease-out;
-        }
-
-        .lightbox-top-bar {
-          position: fixed;
-          top: 1.25rem;
-          left: 1.5rem;
-          right: 1.5rem;
-          display: flex;
-          align-items: center;
-          justifyContent: space-between;
-          z-index: 1020;
-          pointer-events: auto;
-        }
-
-        .lightbox-meta {
-          display: flex;
-          align-items: center;
-          gap: 0.8rem;
-        }
-
-        .lightbox-counter {
-          font-family: var(--font-sans);
-          font-size: 0.85rem;
-          color: var(--text-muted-dark);
-          letter-spacing: 0.05em;
-        }
-
-        .lightbox-close-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 44px;
-          height: 44px;
-          border-radius: var(--radius-full);
-          background-color: rgba(13, 49, 49, 0.7);
-          border: 1px solid var(--gold-border);
-          color: var(--ivory-50);
-          cursor: pointer;
-          transition: all 0.2s ease;
-          outline: none;
-        }
-
-        .lightbox-close-btn:focus-visible {
-          border-color: var(--gold-300);
-          box-shadow: 0 0 0 2px rgba(197, 168, 112, 0.4);
-        }
-
-        .lightbox-close-btn:hover {
-          border-color: var(--gold-400);
-          background-color: rgba(197, 168, 112, 0.2);
-          color: var(--gold-200);
-        }
-
-        .lightbox-nav-btn {
-          display: none;
-          position: fixed;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 52px;
-          height: 52px;
-          border-radius: var(--radius-full);
-          background-color: rgba(7, 30, 30, 0.85);
-          border: 1px solid var(--gold-border);
-          color: var(--gold-300);
-          align-items: center;
-          justify-content: center;
-          z-index: 1010;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          outline: none;
-        }
-
-        .lightbox-nav-btn:focus-visible {
-          border-color: var(--gold-300);
-          box-shadow: 0 0 0 2px rgba(197, 168, 112, 0.4);
-        }
-
-        .lightbox-nav-btn:hover {
-          background: var(--gold-gradient);
-          color: var(--teal-950);
-          border-color: var(--gold-300);
-        }
-
-        .lightbox-prev-btn {
-          left: 1.75rem;
-        }
-
-        .lightbox-next-btn {
-          right: 1.75rem;
-        }
-
-        .lightbox-content {
-          max-width: 920px;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justifyContent: center;
-          z-index: 1005;
-          margin-top: auto;
-          margin-bottom: auto;
-          padding: 3.5rem 0 1.5rem;
-        }
-
-        .lightbox-image-wrapper {
-          position: relative;
-          width: 100%;
-          aspect-ratio: 4 / 3;
-          max-height: min(64vh, 600px);
-          border-radius: 16px;
-          overflow: hidden;
-          border: 1px solid var(--gold-border);
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-          background-color: var(--teal-900);
-        }
-
-        :global(.lightbox-image) {
-          object-fit: contain !important;
-          object-position: center;
-        }
-
-        .lightbox-caption-area {
-          width: 100%;
-          margin-top: 1.25rem;
-          text-align: center;
-          padding: 0 1rem;
-        }
-
-        .lightbox-title {
-          font-size: 1.5rem;
-          color: var(--ivory-50);
-          margin-bottom: 0.35rem;
-          font-weight: 400;
-        }
-
-        .lightbox-caption-text {
-          font-family: var(--font-sans);
-          font-size: 0.92rem;
-          color: var(--text-muted-dark);
-          max-width: 600px;
-          margin: 0 auto;
-          line-height: 1.5;
-        }
-
-        .lightbox-mobile-controls {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          max-width: 380px;
-          margin-top: 1.25rem;
-          padding: 0.4rem 0.6rem;
-          background: rgba(7, 30, 30, 0.7);
-          border: 1px solid var(--gold-border);
-          border-radius: var(--radius-full);
-          backdrop-filter: blur(10px);
-        }
-
-        .lightbox-mobile-nav-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.35rem;
-          padding: 0.5rem 0.9rem;
-          border-radius: var(--radius-full);
-          background: rgba(13, 49, 49, 0.6);
-          border: 1px solid var(--gold-border);
-          color: var(--gold-300);
-          font-family: var(--font-sans);
-          font-size: 0.8rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          outline: none;
-        }
-
-        .lightbox-mobile-nav-btn:active {
-          background: var(--gold-gradient);
-          color: var(--teal-950);
-        }
-
-        .lightbox-mobile-counter {
-          font-family: var(--font-sans);
-          font-size: 0.78rem;
-          color: var(--ivory-100);
-          font-weight: 500;
-        }
-
-        @media (min-width: 769px) {
-          .lightbox-nav-btn {
-            display: flex;
-          }
-          .lightbox-mobile-controls {
-            display: none;
-          }
-          .lightbox-content {
-            padding: 4rem 0 2rem;
-          }
-          .lightbox-title {
-            font-size: 1.7rem;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .lightbox-overlay {
-            padding: 0.75rem;
-            justify-content: flex-start;
-          }
-          .lightbox-top-bar {
-            position: sticky;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 0.5rem 0.25rem 0.75rem;
-            background: rgba(4, 18, 18, 0.95);
-            backdrop-filter: blur(12px);
-          }
-          .lightbox-content {
-            margin-top: 0.5rem;
-            padding: 0;
-          }
-          .lightbox-image-wrapper {
-            max-height: 48vh;
-            border-radius: 12px;
-          }
-          .lightbox-title {
-            font-size: 1.25rem;
-          }
-          .lightbox-caption-text {
-            font-size: 0.84rem;
-          }
-        }
-      `}</style>
+      {/* Navigation - Right */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleNext();
+        }}
+        aria-label="Next Image"
+        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-surface-elevated/90 hover:bg-gold-400/20 border border-surface-border hover:border-gold-400/40 text-ivory flex items-center justify-center transition-all duration-200 z-50 shadow-xl"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </button>
     </div>
   );
 }
+
