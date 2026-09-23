@@ -67,8 +67,8 @@ export default function InstagramGalleryPreview() {
                 />
 
                 {/* Click to open badge overlay */}
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 flex items-center justify-center text-ivory/80 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-4 h-4" />
+                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/75 backdrop-blur-md border border-white/30 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all shadow-lg group-hover:scale-110">
+                  <Maximize2 className="w-4 h-4 text-white" />
                 </div>
               </div>
 
